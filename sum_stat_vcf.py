@@ -16,10 +16,31 @@ The updated version: Pi stat
 """
 
 import matplotlib.pyplot as plt
-from itertools import combinations
 import os
 import pandas as pd
 import numpy as np
+
+import argparse
+
+parser = argparse.ArgumentParser(description= 'Generate Summary Statistic from Parsed VCF file')
+parser.add_argument('value', type=str, help= 'Parsed VCF file name')
+parser.add_argument('subfolder', type=str, help= 'Subfolder name where the parsed VCF file is stored')
+args = parser.parse_args()
+
+
+# In[40]:
+
+
+val = args.value
+sub = args.subfolder
+
+
+# In[33]:
+
+path_1 = os.getcwd()
+path = path_1 + "/" + str(sub) + "/" + str(val)
+
+######
     
     
 def pi_stat(matrix, num_strands, window_length, num_stride):
@@ -211,7 +232,7 @@ stats_9 = []
 
 for i in range(1):
     #if len(pi_list_sweep_train)<1000:
-    pi_ = pi_stat(matrix = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/Summary_stat/22/chr22_bed.npy"), num_strands= 198, window_length=10, num_stride=3)
+    pi_ = pi_stat(matrix = np.load(path_1 + "/" + str(sub) + "/" + str(val)), num_strands= 198, window_length=10, num_stride=3)
     if pi_ != None:
         stats_9.append(pi_)
         #clear_output(wait=True)
@@ -225,7 +246,7 @@ for i in range(1):
 
 for i in range(1):
     #if len(pi_list_sweep_train)<1000:
-    h1_, h12_, h2h1_,p1_, p2_, p3_, p4_, p5_ = all_stat(matrix = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/Summary_stat/22/chr22_bed.npy"), num_strands= 198, window_length=10, num_stride=3)
+    h1_, h12_, h2h1_,p1_, p2_, p3_, p4_, p5_ = all_stat(matrix = np.load(path_1 + "/" + str(sub) + "/" + str(val)), num_strands= 198, window_length=10, num_stride=3)
     if pi_ != None:
         stats_9.append(h1_)
         stats_9.append(h12_)
@@ -289,7 +310,7 @@ summary_stat_1152.shape
 # In[28]:
 
 
-np.save('chr22_1152_bed', summary_stat_1152)
+np.save('"sumstat_" + str(val)', summary_stat_1152)
 
 
 # In[ ]:
