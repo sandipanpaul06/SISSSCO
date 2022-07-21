@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-#pseudocomment
 # In[1]:
 
 
@@ -8,11 +7,25 @@ import numpy as np
 import pandas as pd
 import os
 
+import argparse
+
+parser = argparse.ArgumentParser(description= 'Parse VCF file')
+parser.add_argument('value', type=str, help= 'VCF file name')
+parser.add_argument('subfolder', type=str, help= 'Subfolder name where the VCF file is stored')
+args = parser.parse_args()
+
+
+# In[40]:
+
+
+val = args.value
+sub = args.subfolder
+
 
 # In[33]:
 
-
-path = "/mnt/beegfs/home/sarnab2020/Datasets/Empirical/Parsing/1/CEU1.vcf"
+path_1 = os.getcwd()
+path = path_1 + "/" + str(sub) + "/" + str(val)
 with open(path, 'r') as file:
     text = file.readlines()
 
@@ -97,7 +110,7 @@ for i in range(len(text)):
 # In[37]:
 
 
-np.save("chr1_bed_pos", np.array(pos))
+np.save("parsed_" + str(val) + "_positions", np.array(pos))
 
 
 # In[38]:
@@ -118,7 +131,7 @@ df = dataframe.drop(0, 1)
 
 
 num = df.to_numpy()
-np.save('chr1_bed', num)
+np.save("parsed_" + str(val), num)
 
 
 # In[ ]:
