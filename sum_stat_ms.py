@@ -25,7 +25,8 @@ import argparse
 parser = argparse.ArgumentParser(description= 'Generate Summary Statistic from .ms files')
 parser.add_argument('value', type=str, help= '.ms file prefix')
 parser.add_argument('subfolder', type=str, help= 'Subfolder name where the .ms files are stored')
-parser.add_argument('number', type=str, help= 'Number of .ms files in the subfolder')
+parser.add_argument('number', type=int, help= 'Number of .ms files in the subfolder')
+parser.add_argument('class_type', type=int, help= 'Class name. 1 = sweep, 0 = neutral')
 args = parser.parse_args()
 
 
@@ -35,12 +36,15 @@ args = parser.parse_args()
 val = args.value
 sub = args.subfolder
 num_ = args.number
+class_t = args.class_type
+class_name = "sweep" if class_t == 1 else "neutral"
+
 
 
 # In[33]:
 
-path_1 = os.getcwd()
-path = path_1 + "/" + str(sub) + "/" + str(val)
+path1 = os.getcwd()
+
 
 ######
 
@@ -49,7 +53,7 @@ def pi_stat(num_text_file, num_strands, SNP_range, window_length, num_stride):
     
         
     path = path1 + "/"
-    path+= sub + + "/" + val + "_"
+    path+= sub + "/" + val + "_"
     path+= str(num_text_file)+".ms"
     with open(path, 'r') as file:
         text = file.readlines()
@@ -124,6 +128,7 @@ def pi_stat(num_text_file, num_strands, SNP_range, window_length, num_stride):
         #plt.plot(range(len(pi_per_window)), pi_per_window)
         #plt.title("File: "+str(num_text_file)+" Window Length: "+str(window_length)+" Stride: "+str(num_stride))
         #plt.show()
+        print("pi length: ", len(pi_per_window))
     else:
         return None
     return pi_per_window
@@ -154,7 +159,7 @@ def all_stat(num_text_file, num_strands, SNP_range, window_length, num_stride):
     
         
     path = path1 + "/"
-    path+= sub + + "/" + val + "_"
+    path+= sub +  "/" + val + "_"
     path+= str(num_text_file)+".ms"
     with open(path, 'r') as file:
         text = file.readlines()
@@ -187,6 +192,15 @@ def all_stat(num_text_file, num_strands, SNP_range, window_length, num_stride):
 
     data_range = SNP_range
     window = window_length
+    h1_per_window = []
+    h12_per_window = []
+    h2h1_per_window = []
+    p1_per_window = []
+    p1_per_window = []
+    p2_per_window = []
+    p3_per_window = []
+    p4_per_window = []
+    p5_per_window = []
     
     if idx > data_range//2 and len(sites) -idx >  data_range//2 :
     
@@ -248,13 +262,17 @@ def all_stat(num_text_file, num_strands, SNP_range, window_length, num_stride):
             p4_per_window.append(p4)
             p5_per_window.append(p5)
 
+            
+			
+
             ###
 
             sum_term = 0
             for f in range(len(freqs)):
                 sum_term += (freqs[f])**2
             h1 = sum_term
-            h1_per_windows.append(h1)
+            h1_per_window.append(h1)
+            
 
             ####
 
@@ -267,7 +285,7 @@ def all_stat(num_text_file, num_strands, SNP_range, window_length, num_stride):
                 h1 += (freqs[f2])**2
 
             h2h1 = h2/h1
-            h2h1_per_windows.append(h2h1)
+            h2h1_per_window.append(h2h1)
 
             #####
 
@@ -277,16 +295,16 @@ def all_stat(num_text_file, num_strands, SNP_range, window_length, num_stride):
             if len(freqs) < 2:
                 freqs.append(0)
             h12 = (freqs[0]+freqs[1])**2 + sum_term
-            h12_per_windows.append(h12)
+            h12_per_window.append(h12)
 
+    print("p1 length: ", len(p1_per_window))
+    print("h1 length: ", len(h1_per_window))
 
-
-    return h1_per_windows, h12_per_windows, h2h1_per_windows, p1_per_window, p2_per_window, p3_per_window, p4_per_window, p5_per_window
+    return h1_per_window, h12_per_window, h2h1_per_window, p1_per_window, p2_per_window, p3_per_window, p4_per_window, p5_per_window
 
 # In[19]:
 
-
-stats_9 = []
+pi_all = []
 
 
 # In[20]:
@@ -294,89 +312,63 @@ stats_9 = []
 
 for i in range(num_):
     #if len(pi_list_sweep_train)<1000:
-    pi_ = pi_stat(matrix = np.load(num_text_file = i ,num_strands= 198, SNP_range = 400, window_length=10, num_stride=3)
-    if pi_ != None:
-        stats_9.append(pi_)
-        #clear_output(wait=True)
-        #print(i)
-    else:
-        missing.append(i)
+    pi_ = pi_stat(num_text_file = i+1 ,num_strands= 198, SNP_range = 400, window_length=10, num_stride=3)
+    if pi_ != None :
+        pi_all.append(pi_[3:-3])
+        
 
 
 # In[21]:
 
 
+h1_all = [] 
+h12_all = [] 
+h2h1_all = []
+p1_all = [] 
+p2_all = [] 
+p3_all = [] 
+p4_all = [] 
+p5_all = []
+
 for i in range(num_):
     #if len(pi_list_sweep_train)<1000:
-    h1_, h12_, h2h1_,p1_, p2_, p3_, p4_, p5_ = all_stat(num_text_file = i ,num_strands= 198, SNP_range = 400, window_length=10, num_stride=3)
-    if pi_ != None:
-        stats_9.append(h1_)
-        stats_9.append(h12_)
-        stats_9.append(h2h1_)
-        stats_9.append(p1_)
-        stats_9.append(p2_)
-        stats_9.append(p3_)
-        stats_9.append(p4_)
-        stats_9.append(p5_)
-        #clear_output(wait=True)
-        #print(i)
-    else:
-        missing.append(i)
+    h1_, h12_, h2h1_,p1_, p2_, p3_, p4_, p5_ = all_stat(num_text_file = i+1 ,num_strands= 198, SNP_range = 400, window_length=10, num_stride=3)
+    if h1_ != None:
+        h1_all.append(h1_[3:-3])
+        h12_all.append(h12_[3:-3])
+        h2h1_all.append(h2h1_[3:-3])
+        p1_all.append(p1_[3:-3])
+        p2_all.append(p2_[3:-3])
+        p3_all.append(p3_[3:-3])
+        p4_all.append(p4_[3:-3])
+        p5_all.append(p5_[3:-3])
+        
 
 
-# In[22]:
-
-#
-import numpy as np
-chr22 = []
-for i in stats_9:
-    chr22.append(np.array(i))
 
 
-# In[23]:
 
 
-chr22 = np.array(chr22)
+all_summary_stats = []
+all_summary_stats.append(pd.DataFrame(pi_all))
+all_summary_stats.append(pd.DataFrame(h1_all))
+all_summary_stats.append(pd.DataFrame(h12_all))
+all_summary_stats.append(pd.DataFrame(h2h1_all))
+all_summary_stats.append(pd.DataFrame(p1_all))
+all_summary_stats.append(pd.DataFrame(p2_all))
+all_summary_stats.append(pd.DataFrame(p3_all))
+all_summary_stats.append(pd.DataFrame(p4_all))
+all_summary_stats.append(pd.DataFrame(p5_all))
 
 
-# In[24]:
+nump = np.zeros((len(pi_all) , 1152))
+df = pd.DataFrame(nump)
 
-
-summary_stat_1152 = []
-
-
-# In[25]:
-
-
-for i in range(len(stats_9[0])-127):
-    row = []
+stat = 0
+for i in all_summary_stats:
     for j in range(128):
-        for k in range(9):
-            row.append(stats_9[k][i+j])
-            
-    summary_stat_1152.append(np.array(row))
-
-
-# In[26]:
-
-
-summary_stat_1152 = np.array(summary_stat_1152)
-
-
-# In[27]:
-
-
-summary_stat_1152.shape
-
-
-# In[28]:
-
-
-np.save('"sumstat_" + str(val)', summary_stat_1152)
-
-
-# In[ ]:
-
-
-
-
+        pos = stat + len(all_summary_stats) * j
+        df[pos] = list(i.iloc[:, j])
+    stat+=1
+print("dataset shape : " , df.shape)
+df.to_csv('training_'+ class_name+ '.csv', index=False, header= False)
