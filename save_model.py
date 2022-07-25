@@ -1,43 +1,108 @@
 import numpy as np
-X_train_0 = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/X_train_stockwell_hardceu.npy")
-X_test_0 = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/X_test_stockwell_emp_0.npy")
-X_val_0 = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/X_val_stockwell_hardceu.npy")
-Y_train_0 = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/Y_train.npy")
-#Y_test_0 = np.load("/mnt/beegfs/home/sarnab2020/Datasets/HARD_CEU/Y_test_hardceu_missing.npy")
-Y_val_0 = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/Y_val.npy")
+
+
+
+import argparse
+
+parser = argparse.ArgumentParser(description= 'Train the model')
+parser.add_argument('TFA_folder', type=str, help= 'Time-frequency dataset folder name')
+parser.add_argument('S_train', type=str, help= 'S transform training file name')
+parser.add_argument('M_train', type=str, help= 'Multitaper training file name')
+parser.add_argument('W_train', type=str, help= 'Wavelet training file name')
+
+parser.add_argument('S_test', type=str, help= 'S transform testing file name')
+parser.add_argument('M_test', type=str, help= 'Multitaper testing file name')
+parser.add_argument('W_test', type=str, help= 'Wavelet testing file name')
+
+parser.add_argument('S_val', type=str, help= 'S transform validation file name')
+parser.add_argument('M_val', type=str, help= 'Multitaper validation file name')
+parser.add_argument('W_val', type=str, help= 'Wavelet validation file name')
+
+parser.add_argument('train', type=int, help= 'Training samples')
+parser.add_argument('test', type=int, help= 'Test samples')
+parser.add_argument('val', type=int, help= 'validation samples')
+
+
+args = parser.parse_args()
+
+
+
+
+
+# In[40]:
+
+
+TFA = args. TFA_folder
+s_tr = args.S_train
+m_tr = args.M_train
+w_tr = args.W_train
+
+s_ts = args.S_test
+m_ts = args.M_test
+w_ts = args.W_test
+
+s_vl = args.S_train
+m_vl = args.M_train
+w_vl = args.W_test
+
+
+tr_n = args.train
+ts_n = args.test
+vl_n = args.val
+
+
+
+
+# In[33]:
+
+path1 = os.getcwd()
+
+
+
+
+
+
+
+
+X_train_0 = np.load(path1 + '/' + TFA + '/' + s_tr)
+X_test_0 = np.load(path1 + '/' + TFA + '/' + s_ts)
+X_val_0 = np.load(path1 + '/' + TFA + '/' + s_vl)
+Y_train_0 = np.load(path1 + '/' + TFA + '/' + y_tr)
+Y_test_0 = np.load(path1 + '/' + TFA + '/' + y_ts)
+Y_val_0 = np.load(path1 + '/' + TFA + '/' + y_vl)
 
 
 ####
-tr = np.zeros((18000, 65, 128, 1))
+tr = np.zeros((2*tr_n, 65, 128, 1))
 
 X_9_stockwell_train = []
 
 for s in range(9):
-    for i in range(18000):
+    for i in range(2*tr_n):
         for j in range(65):
             for k in range(128):
                 tr[i][j][k][0] = X_train_0[i][j][k][s]
                 X_9_stockwell_train.append(tr)
                 
 
-ts = np.zeros((10000, 65, 128, 1))
+ts = np.zeros((2*ts_n, 65, 128, 1))
 
 X_9_stockwell_test = []
 
 for s in range(9):
-    for i in range(10000):
+    for i in range(2*ts_n):
         for j in range(65):
             for k in range(128):
                 ts[i][j][k][0] = X_test_0[i][j][k][s]
                 X_9_stockwell_test.append(ts)
                 
 
-vl = np.zeros((2000, 65, 128, 1))
+vl = np.zeros((2*vl_n, 65, 128, 1))
 
 X_9_stockwell_val = []
 
 for s in range(9):
-    for i in range(2000):
+    for i in range(2*vl_n):
         for j in range(65):
             for k in range(128):
                 vl[i][j][k][0] = X_val_0[i][j][k][s]
@@ -404,38 +469,38 @@ for layer in model0_8.layers[:-2]: # go through until last layer
     
 ########
 
-X_train_1 = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/X_train_multitaper_hardceu.npy")
-X_test_1 = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/X_test_multitaper_emp.npy")
-X_val_1 = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/X_val_multitaper_hardceu.npy")
+X_train_1 = np.load(path1 + '/' + TFA + '/' + m_tr)
+X_test_1 = np.load(path1 + '/' + TFA + '/' + m_ts)
+X_val_1 = np.load(path1 + '/' + TFA + '/' + m_vl)
 
 
-a = np.zeros((18000, 65, 128, 1))
+a = np.zeros((2*tr_n, 65, 128, 1))
 
 X_9_multitaper_train = []
 
 for s in range(9):
-    for i in range(18000):
+    for i in range(2*tr_n):
         for j in range(65):
             for k in range(128):
                 a[i][j][k][0] = X_train_1[i][j][k][s]
                 X_9_multitaper_train.append(a)
                 
                 
-a = np.zeros((10000, 65, 128, 1))
+a = np.zeros((2*ts_n, 65, 128, 1))
 X_9_multitaper_test = []
 
 for s in range(9):
-    for i in range(10000):
+    for i in range(2*ts_n):
         for j in range(65):
             for k in range(128):
                 a[i][j][k][0] = X_test_1[i][j][k][s]
                 X_9_multitaper_test.append(a)
                 
-a = np.zeros((2000, 65, 128, 1))
+a = np.zeros((2*vl_n, 65, 128, 1))
 X_9_multitaper_val = []
 
 for s in range(9):
-    for i in range(2000):
+    for i in range(2*vl_n):
         for j in range(65):
             for k in range(128):
                 a[i][j][k][0] = X_val_1[i][j][k][s]
@@ -785,37 +850,37 @@ for layer in model1_8.layers[:-2]: # go through until last layer
 
 ########
 
-X_train_2 = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/X_train_wavelet_hardceu.npy")
-X_test_2 = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/X_test_wavelet_emp_0.npy")
-X_val_2 = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/X_val_wavelet_hardceu.npy")
+X_train_2 = np.load(path1 + '/' + TFA + '/' + w_tr)
+X_test_2 = np.load(path1 + '/' + TFA + '/' + w_ts)
+X_val_2 = np.load(path1 + '/' + TFA + '/' + w_vl)
 
 
-a = np.zeros((18000, 65, 128, 1))
+a = np.zeros((2*tr, 65, 128, 1))
 
 X_9_wavelet_train = []
 
 for s in range(9):
-    for i in range(18000):
+    for i in range(2*tr_n):
         for j in range(65):
             for k in range(128):
                 a[i][j][k][0] = X_train_2[i][j][k][s]
                 X_9_wavelet_train.append(a)
                 
-a = np.zeros((10000, 65, 128, 1))
+a = np.zeros((2*ts_n, 65, 128, 1))
 X_9_wavelet_test = []
 
 for s in range(9):
-    for i in range(10000):
+    for i in range(2*ts_n):
         for j in range(65):
             for k in range(128):
                 a[i][j][k][0] = X_test_2[i][j][k][s]
                 X_9_wavelet_test.append(a)
                 
-a = np.zeros((2000, 65, 128, 1))
+a = np.zeros((2*vl_n, 65, 128, 1))
 X_9_wavelet_val = []
 
 for s in range(9):
-    for i in range(2000):
+    for i in range(2*vl_n):
         for j in range(65):
             for k in range(128):
                 a[i][j][k][0] = X_val_2[i][j][k][s]
@@ -1230,10 +1295,10 @@ opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = finalModel.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
 history1 = finalModel.fit([X_9_stockwell_train[0], X_9_stockwell_train[1], X_9_stockwell_train[2], X_9_stockwell_train[3], X_9_stockwell_train[4], X_9_stockwell_train[5], X_9_stockwell_train[6], X_9_stockwell_train[7], X_9_stockwell_train[8], X_9_multitaper_train[0], X_9_multitaper_train[1], X_9_multitaper_train[2], X_9_multitaper_train[3], X_9_multitaper_train[4], X_9_multitaper_train[5], X_9_multitaper_train[6], X_9_multitaper_train[7], X_9_multitaper_train[8], X_9_wavelet_train[0], X_9_wavelet_train[1], X_9_wavelet_train[2], X_9_wavelet_train[3], X_9_wavelet_train[4], X_9_wavelet_train[5], X_9_wavelet_train[6], X_9_wavelet_train[7], X_9_wavelet_train[8]], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= ([X_9_stockwell_val[0], X_9_stockwell_val[1], X_9_stockwell_val[2], X_9_stockwell_val[3], X_9_stockwell_val[4], X_9_stockwell_val[5], X_9_stockwell_val[6], X_9_stockwell_val[7], X_9_stockwell_val[8], X_9_multitaper_val[0], X_9_multitaper_val[1], X_9_multitaper_val[2], X_9_multitaper_val[3], X_9_multitaper_val[4], X_9_multitaper_val[5], X_9_multitaper_val[6], X_9_multitaper_val[7], X_9_multitaper_val[8], X_9_wavelet_val[0], X_9_wavelet_val[1], X_9_wavelet_val[2], X_9_wavelet_val[3], X_9_wavelet_val[4], X_9_wavelet_val[5], X_9_wavelet_val[6], X_9_wavelet_val[7], X_9_wavelet_val[8]], Y_val_0), shuffle=False )
 
-finalModel.save("saved_27CMM")
+finalModel.save("saved_model")
 prediction = finalModel.predict([X_9_stockwell_test[0], X_9_stockwell_test[1], X_9_stockwell_test[2], X_9_stockwell_test[3], X_9_stockwell_test[4], X_9_stockwell_test[5], X_9_stockwell_test[6], X_9_stockwell_test[7], X_9_stockwell_test[8], X_9_multitaper_test[0], X_9_multitaper_test[1], X_9_multitaper_test[2], X_9_multitaper_test[3], X_9_multitaper_test[4], X_9_multitaper_test[5], X_9_multitaper_test[6], X_9_multitaper_test[7], X_9_multitaper_test[8], X_9_wavelet_test[0], X_9_wavelet_test[1], X_9_wavelet_test[2], X_9_wavelet_test[3], X_9_wavelet_test[4], X_9_wavelet_test[5], X_9_wavelet_test[6], X_9_wavelet_test[7], X_9_wavelet_test[8]])
 
-np.save("prediction_empirical_27CMM", prediction)
+np.savetxt("test_prediction.csv", prediction, delimiter = ",")
 
 ####
 
