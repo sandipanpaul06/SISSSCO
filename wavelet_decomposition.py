@@ -71,7 +71,7 @@ All_classes_val_xy["Label"] = label_col
 All_classes_val_xy= All_classes_val_xy.reset_index()
 del All_classes_val_xy['index']
 All_classes_val_xy = pd.get_dummies(All_classes_val_xy)
-All_classes_val_xy = All_classes_val_xy.sample(frac=1, random_state=2)
+All_classes_val_xy = All_classes_val_xy.sample(frac=1, random_state=0)
 
 
 label_col = ["Sweep"]*ts + ["Neutral"]*ts
@@ -79,7 +79,7 @@ All_classes_test_xy["Label"] = label_col
 All_classes_test_xy= All_classes_test_xy.reset_index()
 del All_classes_test_xy['index']
 All_classes_test_xy = pd.get_dummies(All_classes_test_xy)
-#All_classes_test_xy = All_classes_test_xy.sample(frac=1, random_state=4)
+#All_classes_test_xy = All_classes_test_xy.sample(frac=1, random_state=0)
 
 summary_statistics = ["pi", "h1", "h12", "h2/h1", "f1", "f2", "f3", "f4", "f5"]
 
@@ -99,7 +99,7 @@ spec_tensor_val = np.empty((2*vl, 65, 128, 9))
 spec_tensor_test = np.empty((2*ts, 65, 128, 9))
 
 import pywt
-'''
+
 for i in range(All_classes_stats_val["Stat_pi"].shape[0]):
   coefs_list = []
   for j in range(9):
@@ -147,7 +147,7 @@ for i in range(All_classes_stats_train["Stat_pi"].shape[0]):
       for coef in coefs_list:
         six_list.append(coef[k][l])
       spec_tensor_train[i][k][l] = np.array(six_list)
-'''
+
 
 
 for i in range(All_classes_stats_test["Stat_pi"].shape[0]):
@@ -173,7 +173,7 @@ for i in range(All_classes_stats_test["Stat_pi"].shape[0]):
         six_list.append(coef[k][l])
       spec_tensor_test[i][k][l] = np.array(six_list)
       
-'''
+
 y_train = All_classes_train_xy.iloc[:, -2:]
 y_test = All_classes_test_xy.iloc[:, -2:]
 y_val = All_classes_val_xy.iloc[:, -2:]
@@ -250,7 +250,7 @@ for s in range(9):
         for col in range(128):
             for sim in range(All_classes_stats_train["Stat_pi"].shape[0]):
                 scaled_spec_tensor_train[sim][row][col][s] = (spec_tensor_train[sim][row][col][s] - train_mean[0][row][col][s])/train_SD[0][row][col][s]
-'''
+
 scaled_spec_tensor_test = np.empty((2*ts, 65, 128, 9))
 
 for s in range(9):
@@ -258,7 +258,7 @@ for s in range(9):
         for col in range(128):
             for sim in range(All_classes_stats_test["Stat_pi"].shape[0]):
                 scaled_spec_tensor_test[sim][row][col][s] = (spec_tensor_test[sim][row][col][s] - train_mean[0][row][col][s])/train_SD[0][row][col][s]
-'''
+
 scaled_spec_tensor_val = np.empty((2*vl, 65, 128, 9))
 
 for s in range(9):
@@ -312,7 +312,7 @@ cbar_ax = fig.add_axes([0.88, 0.15, 0.04, 0.7])
 fig.colorbar(im2, cax=cbar_ax)
 
 plt.savefig('Standardized.png')
-'''
+
 X_train_1 = scaled_spec_tensor_train.copy()
 X_test_1 = scaled_spec_tensor_test.copy()
 X_val_1 = scaled_spec_tensor_val.copy()
