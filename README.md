@@ -238,7 +238,7 @@ Use this space to list resources you find helpful and would like to give credit 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
-[Python.org]: https://en.wikipedia.org/wiki/Python_%28programming_language%29
+[Python.org]: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png
 [Python-url]: https://www.python.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
