@@ -32,7 +32,7 @@ args = parser.parse_args()
 # In[40]:
 
 
-TFA = args. TFA_folder
+TFA = args.TFA_folder
 s_tr = args.S_train
 m_tr = args.M_train
 w_tr = args.W_train
@@ -1295,7 +1295,7 @@ opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = finalModel.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
 history1 = finalModel.fit([X_9_stockwell_train[0], X_9_stockwell_train[1], X_9_stockwell_train[2], X_9_stockwell_train[3], X_9_stockwell_train[4], X_9_stockwell_train[5], X_9_stockwell_train[6], X_9_stockwell_train[7], X_9_stockwell_train[8], X_9_multitaper_train[0], X_9_multitaper_train[1], X_9_multitaper_train[2], X_9_multitaper_train[3], X_9_multitaper_train[4], X_9_multitaper_train[5], X_9_multitaper_train[6], X_9_multitaper_train[7], X_9_multitaper_train[8], X_9_wavelet_train[0], X_9_wavelet_train[1], X_9_wavelet_train[2], X_9_wavelet_train[3], X_9_wavelet_train[4], X_9_wavelet_train[5], X_9_wavelet_train[6], X_9_wavelet_train[7], X_9_wavelet_train[8]], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= ([X_9_stockwell_val[0], X_9_stockwell_val[1], X_9_stockwell_val[2], X_9_stockwell_val[3], X_9_stockwell_val[4], X_9_stockwell_val[5], X_9_stockwell_val[6], X_9_stockwell_val[7], X_9_stockwell_val[8], X_9_multitaper_val[0], X_9_multitaper_val[1], X_9_multitaper_val[2], X_9_multitaper_val[3], X_9_multitaper_val[4], X_9_multitaper_val[5], X_9_multitaper_val[6], X_9_multitaper_val[7], X_9_multitaper_val[8], X_9_wavelet_val[0], X_9_wavelet_val[1], X_9_wavelet_val[2], X_9_wavelet_val[3], X_9_wavelet_val[4], X_9_wavelet_val[5], X_9_wavelet_val[6], X_9_wavelet_val[7], X_9_wavelet_val[8]], Y_val_0), shuffle=False )
 
-finalModel.save("saved_model")
+finalModel.save("saved_model_SISSSCO")
 prediction = finalModel.predict([X_9_stockwell_test[0], X_9_stockwell_test[1], X_9_stockwell_test[2], X_9_stockwell_test[3], X_9_stockwell_test[4], X_9_stockwell_test[5], X_9_stockwell_test[6], X_9_stockwell_test[7], X_9_stockwell_test[8], X_9_multitaper_test[0], X_9_multitaper_test[1], X_9_multitaper_test[2], X_9_multitaper_test[3], X_9_multitaper_test[4], X_9_multitaper_test[5], X_9_multitaper_test[6], X_9_multitaper_test[7], X_9_multitaper_test[8], X_9_wavelet_test[0], X_9_wavelet_test[1], X_9_wavelet_test[2], X_9_wavelet_test[3], X_9_wavelet_test[4], X_9_wavelet_test[5], X_9_wavelet_test[6], X_9_wavelet_test[7], X_9_wavelet_test[8]])
 
 np.savetxt("test_prediction.csv", prediction, delimiter = ",")
