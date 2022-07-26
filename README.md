@@ -91,13 +91,6 @@ Natural selection leaves a spatial pattern along the genome, with a distortion i
 
 
 * [![Python][Python.org]][Python-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -106,15 +99,17 @@ Natural selection leaves a spatial pattern along the genome, with a distortion i
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+Python version 3.8.5 or above is necessary to use this software. Run the following commands to ensure you have the required version.
+* set python3 as python
   ```sh
-  npm install npm@latest -g
+  alias python=python3
+  ```
+* check python3 version
+  ```sh
+  python --version
   ```
 
 ### Installation
