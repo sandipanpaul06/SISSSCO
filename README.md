@@ -41,9 +41,9 @@
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/sandipanpaul06/SISSSCO/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/sandipanpaul06/SISSSCO/issues">Request Feature</a>
   </p>
 </div>
 
@@ -80,18 +80,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
+Natural selection leaves a spatial pattern along the genome, with a distortion in the haplotype distribution near the selected locus that becomes less prominent with increasing distance from the locus. Evaluating the spatial signal of a population-genetic summary statistic across the genome allows for patterns of natural selection to be distinguished from neutrality. Different summary statistics highlight diverse components of genetic variation and, therefore, considering the genomic spatial distribution of multiple summary statistics is expected to aid in uncovering subtle signatures of selection. In recent years, numerous methods have been devised that jointly consider genomic spatial distributions across summary statistics, utilizing both classical machine learning and contemporary deep learning architectures. However, better predictions may be attainable by improving the way in which features used as input to machine learning algorithms are extracted from these summary statistics. To achieve this goal, we apply three time-frequency analysis approaches (wavelet, multitaper, and S-transform analyses) to summary statistic signals. Each analysis method converts a one-dimensional summary statistic signal to a two-dimensional image of spectral density or visual representation of time-frequency analysis, permitting the simultaneous representation of temporal and spectral information. We use these images as input to convolutional neural networks and consider combining models across different time-frequency representation approaches through the ensemble stacking technique. Application of our modeling framework to data simulated from neutral and selective sweep scenarios reveals that it achieves almost perfect accuracy and power across a diverse set of evolutionary settings, including population size changes and test sets for which sweep strength, softness, and timing parameters were drawn from a wide range. Given that this modeling framework is also robust to missing data, we believe that it will represent a welcome addition to the population-genomic toolkit for learning about adaptive processes from genomic data.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
