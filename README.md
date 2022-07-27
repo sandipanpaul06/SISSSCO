@@ -138,7 +138,12 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 1. Creating training and testing datasets:
 
- A. .ms output fles:
+ A. Open terminal and go to SISSSCO software directory. Example:
+   ```sh
+   cd /Users/sarnab2020/Desktop/git_sisssco
+   ```
+
+ B. .ms output fles:
 
    i. The .ms files are located in "Datasets" folder in the SISSSCO software directory. For example:
    ```sh
@@ -160,6 +165,19 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    ```sh
    CEU_neut_1.ms, CEU_neut_2.ms ... CEU_neut_100.ms
    ```
+
+ C. Run sum_stat_ms.py to generate summary statistics:
+
+   i. Command to view the necessary arguments, run:
+   ```sh
+   python sum_stat_ms.py -h
+   ```
+<br />
+<div align="center">
+  <a href="https://github.com/sandipanpaul06/SISSSCO">
+    <img src="images/sumstatms.png" alt="Logo" width="200" height="80">
+  </a>
+</div>   
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

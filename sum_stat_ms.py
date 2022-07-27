@@ -23,27 +23,28 @@ import numpy as np
 import argparse
 
 parser = argparse.ArgumentParser(description= 'Generate Summary Statistic from .ms files')
-parser.add_argument('value', type=str, help= '.ms file prefix')
-parser.add_argument('subfolder', type=str, help= 'Subfolder name where the .ms files are stored')
-parser.add_argument('number', type=int, help= 'Number of .ms files in the subfolder')
+parser.add_argument('pref', type=str, help= '.ms file prefix')
 parser.add_argument('class_type', type=int, help= 'Class name. 1 = sweep, 0 = neutral')
+parser.add_argument('number', type=int, help= 'Number of .ms files of the chosen class')
+
 args = parser.parse_args()
 
 
 # In[40]:
 
 
-val = args.value
-sub = args.subfolder
+val = args.pref
 num_ = args.number
 class_t = args.class_type
-class_name = "sweep" if class_t == 1 else "neutral"
+sub = "Sweep" if class_t == 1 else "Neutral"
+class_name = sub
 
 
 
 # In[33]:
 
 path1 = os.getcwd()
+path1 = path1 + "/Datasets"
 
 
 ######
