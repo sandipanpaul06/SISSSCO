@@ -114,20 +114,19 @@ Python version 3.8.5 or above is necessary to use this software. Run the followi
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stockwell
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   https://github.com/sandipanpaul06/SISSSCO.git
    ```
-3. Install NPM packages
+3. Package installation
    ```sh
-   npm install
+   pip install pandas numpy tensorflow PyWavelets spectrum stockwell
    ```
-4. Enter your API in `config.js`
+4. For the packages already installed, upgrade the packages to the most updated version. For example
    ```js
-   const API_KEY = 'ENTER YOUR API';
+   pip install --upgrade tensorflow
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -137,9 +136,30 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+1. Creating training and testing datasets:
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+ A. .ms output fles:
+
+   i. The .ms files are located in "Datasets" folder in the SISSSCO software directory. For example:
+   ```sh
+   /Users/user/Desktop/SISSSCO/Datasets
+   ```
+   ii. The "Datasets" folder has two sub-folders: "Neutral" and "Sweep". The neutral .ms files need to be placed in the "Neutral" folder, and the sweep .ms files need to be placed in the "Sweep" folder.
+
+   iii. 100 sample files each can be found in the "Neutral" and "Sweep" subfolders. These files can be accessed by (example directory):
+   ```sh
+   /Users/user/Desktop/SISSSCO/Datasets/Neutral
+   ```
+   ```sh
+   /Users/user/Desktop/SISSSCO/Datasets
+   ```
+   iv. The sweep .ms files have a prefix "CEU_sweep", and the neutral .ms files have a prefix "CEU_neut", followed by consecutive numbers from 1 to 100. Example:
+   ```sh
+   CEU_sweep_1.ms, CEU_sweep_2.ms ... CEU_sweep_100.ms
+   ```
+   ```sh
+   CEU_neut_1.ms, CEU_neut_2.ms ... CEU_neut_100.ms
+   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

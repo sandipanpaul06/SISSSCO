@@ -116,7 +116,7 @@ X_val_0 = None
 
 import tensorflow as tf
 tf.random.set_seed(221)
-#import keras
+
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, Flatten, Dropout, Activation, ReLU, Conv2D, MaxPooling2D, BatchNormalization, Input
 from tensorflow.keras.optimizers import Adam
