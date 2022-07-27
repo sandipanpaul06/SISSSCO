@@ -43,8 +43,8 @@ class_name = sub
 
 # In[33]:
 
-path1 = os.getcwd()
-path1 = path1 + "/Datasets"
+path0 = os.getcwd()
+path1 = path0 + "/Datasets"
 
 
 ######
@@ -129,7 +129,7 @@ def pi_stat(num_text_file, num_strands, SNP_range, window_length, num_stride):
         #plt.plot(range(len(pi_per_window)), pi_per_window)
         #plt.title("File: "+str(num_text_file)+" Window Length: "+str(window_length)+" Stride: "+str(num_stride))
         #plt.show()
-        print("pi length: ", len(pi_per_window))
+        #print("pi length: ", len(pi_per_window))
     else:
         return None
     return pi_per_window
@@ -298,8 +298,10 @@ def all_stat(num_text_file, num_strands, SNP_range, window_length, num_stride):
             h12 = (freqs[0]+freqs[1])**2 + sum_term
             h12_per_window.append(h12)
 
-    print("p1 length: ", len(p1_per_window))
-    print("h1 length: ", len(h1_per_window))
+    #print("p1 length: ", len(p1_per_window))
+    #print("h1 length: ", len(h1_per_window))
+    else:
+        return None
 
     return h1_per_window, h12_per_window, h2h1_per_window, p1_per_window, p2_per_window, p3_per_window, p4_per_window, p5_per_window
 
@@ -372,4 +374,4 @@ for i in all_summary_stats:
         df[pos] = list(i.iloc[:, j])
     stat+=1
 print("dataset shape : " , df.shape)
-df.to_csv('training_'+ class_name+ '.csv', index=False, header= False)
+df.to_csv(path0 + '/Summary_statistics/' +'training_'+ class_name+ '.csv', index=False, header= False)

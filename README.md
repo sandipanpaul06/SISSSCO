@@ -181,7 +181,21 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+   ii. pref: .ms file prefix, class_type: 1 for sweep or 0 for neutral, number: number of simulations (numbered consecutively starting from 1)
 
+   iii. Example run with sample .ms files:
+
+   ```sh
+   sum_stat_ms.py CEU_neut 0 100
+   ```
+   ```sh
+   sum_stat_ms.py CEU_sweep 1 100
+   ```
+
+   iv. Output file will be saved in "Summary_statistics" folder and output message will show the size of the dataset (number of qualified samples, 1152):
+   ```sh
+   dataset shape :  (100, 1152)
+   ```
 
 <!-- ROADMAP -->
 ## Roadmap
