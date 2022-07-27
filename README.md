@@ -175,7 +175,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 <br />
 <div align="center">
   <a href="https://github.com/sandipanpaul06/SISSSCO">
-    <img src="images/sumstatms.png" alt="Logo" width="200" height="80">
+    <img src="images/sumstatms.png" alt="Logo" width="10000">
   </a>
 </div>   
 
