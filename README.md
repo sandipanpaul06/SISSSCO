@@ -235,19 +235,19 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 
 
-E. Run multitaper_analysis.py to time-frequency imagee dataset for multitaper spectral analysis:
+E. Run multitaper_analysis.py to time-frequency imagee dataset for S transform:
 
    i. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
    
 
    ii. To view the necessary arguments, run:
    ```sh
-   python multitaper_analysis.py -h
+   python s_transform.py -h
    ```
 <br />
 <div align="center">
   <a href="https://github.com/sandipanpaul06/SISSSCO">
-    <img src="images/multitaper.png" alt="Logo" width="10000">
+    <img src="images/stransform.png" alt="Logo" width="10000">
   </a>
 </div>   
 
@@ -258,7 +258,7 @@ E. Run multitaper_analysis.py to time-frequency imagee dataset for multitaper sp
    iv. Example run with sample summary statistic file:
 
    ```sh
-   python multitaper_analysis.py training_Sweep.csv training_Neutral.csv 60 20 20
+   python s_transform.py training_Sweep.csv training_Neutral.csv 60 20 20
    ```
 
 
