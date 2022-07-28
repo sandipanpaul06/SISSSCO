@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import os
 
 
 
@@ -7,13 +8,11 @@ import numpy as np
 import argparse
 
 parser = argparse.ArgumentParser(description= 'Generate Time-frequency images for wavelet transform')
-parser.add_argument('sweep_filename', type=str, help= 'Sweep dataset filename')
-parser.add_argument('sweep_folder', type=str, help= 'Sweep dataset folder name')
-parser.add_argument('neutral_filename', type=str, help= 'Neutral dataset filename')
-parser.add_argument('neutral_folder', type=str, help= 'Neutral dataset folder name')
-parser.add_argument('train', type=int, help= 'Training samples')
-parser.add_argument('test', type=int, help= 'Test samples')
-parser.add_argument('val', type=int, help= 'validation samples')
+parser.add_argument('sweep_filename', type=str, help= 'Sweep summary statistic filename')
+parser.add_argument('neutral_filename', type=str, help= 'Neutral summary statistic filename')
+parser.add_argument('train', type=int, help= '# of Training samples')
+parser.add_argument('test', type=int, help= '# of Test samples')
+parser.add_argument('val', type=int, help= '# of validation samples')
 
 args = parser.parse_args()
 
@@ -25,13 +24,11 @@ args = parser.parse_args()
 
 
 sw_file = args.sweep_filename
-sw_folder = args.sweep_foldername
 nt_file = args.neutral_filename
-nt_folder = args.neutral_foldername
 
-tr = args.train
-ts = args.test
-vl = args.val
+tr_n = args.train
+ts_n = args.test
+vl_n = args.val
 
 
 
@@ -46,19 +43,19 @@ path1 = os.getcwd()
 """
 The three paths here needs to be changed
 """
-sweep = pd.read_csv(path1 + '/' + sw_folder + '/' + sw_file ,header= None)
-neutral = pd.read_csv(path1 + '/' + nt_folder + '/' + nt_file,header= None)
+sweep = pd.read_csv(path1 + '/Summary_statistics/' + sw_file ,header= None)
+neutral = pd.read_csv(path1 + '/Summary_statistics/' + nt_file,header= None)
 #test = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/signal_decomposition/22/chr22_1152_bed.npy")
 
 #TEST = pd.DataFrame(test)
 
-All_classes_train_xy = pd.concat([sweep.iloc[:tr, :], neutral.iloc[:tr, :]])
-All_classes_val_xy = pd.concat([sweep.iloc[tr:tr+vl, :], neutral.iloc[tr:tr+vl, :]])
-All_classes_test_xy= pd.concat([sweep.iloc[tr+vl:tr+vl+ts, :], neutral.iloc[tr+vl:tr+vl+ts, :]])
+All_classes_train_xy = pd.concat([sweep.iloc[:tr_n, :], neutral.iloc[:tr_n, :]])
+All_classes_val_xy = pd.concat([sweep.iloc[tr_n:tr_n +vl_n, :], neutral.iloc[tr_n:tr_n +vl_n, :]])
+All_classes_test_xy= pd.concat([sweep.iloc[tr_n +vl_n :tr_n +vl_n +ts_n, :], neutral.iloc[tr_n+ vl_n:tr_n+vl_n+ts_n, :]])
 
 #All_classes_test_xy= pd.concat([TEST.iloc[:1000, :], TEST.iloc[1000:10000, :]])
 
-label_col = ["Sweep"]*tr + ["Neutral"]*tr
+label_col = ["Sweep"]*tr_n + ["Neutral"]*tr_n
 All_classes_train_xy["Label"] = label_col
 All_classes_train_xy= All_classes_train_xy.reset_index()
 del All_classes_train_xy['index']
@@ -66,7 +63,7 @@ All_classes_train_xy = pd.get_dummies(All_classes_train_xy)
 All_classes_train_xy = All_classes_train_xy.sample(frac=1, random_state=0)
 
 
-label_col = ["Sweep"]*vl + ["Neutral"]*vl
+label_col = ["Sweep"]*vl_n + ["Neutral"]*vl_n
 All_classes_val_xy["Label"] = label_col
 All_classes_val_xy= All_classes_val_xy.reset_index()
 del All_classes_val_xy['index']
@@ -74,12 +71,12 @@ All_classes_val_xy = pd.get_dummies(All_classes_val_xy)
 All_classes_val_xy = All_classes_val_xy.sample(frac=1, random_state=0)
 
 
-label_col = ["Sweep"]*ts + ["Neutral"]*ts
+label_col = ["Sweep"]*ts_n + ["Neutral"]*ts_n
 All_classes_test_xy["Label"] = label_col
 All_classes_test_xy= All_classes_test_xy.reset_index()
 del All_classes_test_xy['index']
 All_classes_test_xy = pd.get_dummies(All_classes_test_xy)
-#All_classes_test_xy = All_classes_test_xy.sample(frac=1, random_state=0)
+All_classes_test_xy = All_classes_test_xy.sample(frac=1, random_state=0)
 
 summary_statistics = ["pi", "h1", "h12", "h2/h1", "f1", "f2", "f3", "f4", "f5"]
 
@@ -94,9 +91,9 @@ for x in range(9):
 
 import numpy as np
 
-spec_tensor_train = np.empty((2*tr, 65, 128, 9))
-spec_tensor_val = np.empty((2*vl, 65, 128, 9))
-spec_tensor_test = np.empty((2*ts, 65, 128, 9))
+spec_tensor_train = np.empty((2*tr_n, 65, 128, 9))
+spec_tensor_val = np.empty((2*vl_n, 65, 128, 9))
+spec_tensor_test = np.empty((2*ts_n, 65, 128, 9))
 
 import pywt
 
@@ -192,7 +189,7 @@ for s in range(9):
         for col in range(128):
             pixel_list_sweep = []
             pixel_list_neutral = []
-            for sim in range(18000):
+            for sim in range(2*tr_n):
                 if lab[sim] == 1:
                     pixel_list_neutral.append(spec_tensor_train[sim][row][col][s])
                 else:
@@ -226,7 +223,7 @@ fig.subplots_adjust(right=0.85)
 cbar_ax = fig.add_axes([0.88, 0.15, 0.04, 0.7])
 fig.colorbar(im2, cax=cbar_ax)
 
-plt.savefig("unstandardized.png")
+plt.savefig("TFA/unstandardized_wavelet.png")
 
 
 #for s in range(len(summary_statistics)):
@@ -243,7 +240,7 @@ for s in range(9):
 train_mean = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/train_mean_wavelet.npy")
 train_SD = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/train_SD_wavelet.npy")
 '''
-scaled_spec_tensor_train = np.empty((2*tr, 65, 128, 9))
+scaled_spec_tensor_train = np.empty((2*tr_n, 65, 128, 9))
 
 for s in range(9):
     for row in range(65):
@@ -251,7 +248,7 @@ for s in range(9):
             for sim in range(All_classes_stats_train["Stat_pi"].shape[0]):
                 scaled_spec_tensor_train[sim][row][col][s] = (spec_tensor_train[sim][row][col][s] - train_mean[0][row][col][s])/train_SD[0][row][col][s]
 
-scaled_spec_tensor_test = np.empty((2*ts, 65, 128, 9))
+scaled_spec_tensor_test = np.empty((2*ts_n, 65, 128, 9))
 
 for s in range(9):
     for row in range(65):
@@ -259,7 +256,7 @@ for s in range(9):
             for sim in range(All_classes_stats_test["Stat_pi"].shape[0]):
                 scaled_spec_tensor_test[sim][row][col][s] = (spec_tensor_test[sim][row][col][s] - train_mean[0][row][col][s])/train_SD[0][row][col][s]
 
-scaled_spec_tensor_val = np.empty((2*vl, 65, 128, 9))
+scaled_spec_tensor_val = np.empty((2*vl_n, 65, 128, 9))
 
 for s in range(9):
     for row in range(65):
@@ -267,8 +264,8 @@ for s in range(9):
             for sim in range(All_classes_stats_val["Stat_pi"].shape[0]):
                 scaled_spec_tensor_val[sim][row][col][s] = (spec_tensor_val[sim][row][col][s] - train_mean[0][row][col][s])/train_SD[0][row][col][s]
 
-np.save("train_SD_wavelet", train_SD)
-np.save("train_mean_wavelet", train_mean)
+np.save("TFA/train_SD_wavelet", train_SD)
+np.save("TFA/train_mean_wavelet", train_mean)
 
 standardized_scalogram_sweep = np.empty((65, 128))
 standardizzed_scalogram_neutral = np.empty((65, 128))
@@ -280,7 +277,7 @@ for s in range(1):
         for col in range(128):
             pixel_list_sweep = []
             pixel_list_neutral = []
-            for sim in range(18000):
+            for sim in range(2*tr_n):
                 if lab[sim] == 1:
                     pixel_list_neutral.append(scaled_spec_tensor_train[sim][row][col][s])
                 else:
@@ -311,7 +308,7 @@ fig.subplots_adjust(right=0.85)
 cbar_ax = fig.add_axes([0.88, 0.15, 0.04, 0.7])
 fig.colorbar(im2, cax=cbar_ax)
 
-plt.savefig('Standardized.png')
+plt.savefig('TFA/Standardized_wavelet.png')
 
 X_train_1 = scaled_spec_tensor_train.copy()
 X_test_1 = scaled_spec_tensor_test.copy()
@@ -320,11 +317,11 @@ Y_train_1 = np.array(y_train)
 Y_test_1 = np.array(y_test)
 Y_val_1 = np.array(y_val)
 
-np.save("X_train_wavelet", X_train_1)
-np.save("X_test_wavelet", X_test_1)
-np.save("X_val_wavelet", X_val_1)
-np.save("Y_train", Y_train_1)
-np.save("Y_test", Y_test_0)
-np.save("Y_val", Y_val_1)
+np.save("TFA/X_train_wavelet", X_train_1)
+np.save("TFA/X_test_wavelet", X_test_1)
+np.save("TFA/X_val_wavelet", X_val_1)
+np.save("TFA/Y_train", Y_train_1)
+np.save("TFA/Y_test", Y_test_1)
+np.save("TFA/Y_val", Y_val_1)
             
 

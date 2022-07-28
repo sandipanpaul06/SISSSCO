@@ -192,10 +192,49 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    sum_stat_ms.py CEU_sweep 1 100
    ```
 
-   iv. Output file will be saved in "Summary_statistics" folder and output message will show the size of the dataset (number of qualified samples, 1152):
+   iv. Output file will be saved in "Summary_statistics" folder and output message will print the size of the dataset (number of qualified samples, 1152):
    ```sh
    dataset shape :  (100, 1152)
    ```
+
+   Sweep:
+   ```sh
+   dataset shape :  (100, 1152)
+   ```
+
+
+ D. Run wavelet_decomposition.py to generate summary statistics:
+
+   i. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
+   
+
+   ii. Command to view the necessary arguments, run:
+   ```sh
+   python wavelet_decomposition.py -h
+   ```
+<br />
+<div align="center">
+  <a href="https://github.com/sandipanpaul06/SISSSCO">
+    <img src="images/wavelet.png" alt="Logo" width="10000">
+  </a>
+</div>   
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+   iii. sweep_filename: name of the summary statistic file for class sweep, neutral_filename: name of the summary statistic file for class neutral, train = number of samples to be used for training, test = number of samples to be used for testing, val = number of samples to be used for validation. Train + Test + Val <= total number of samples in the summary statistic dataset. The same train, test and val must be used throughout the model training process.
+
+   iv. Example run with sample summary statistic file:
+
+   ```sh
+   python wavelet_decomposition.py training_Sweep.csv training_Neutral.csv 60 20 20
+   ```
+
+
+   iv. Output files will be saved in "TFA" folder. The files are: standardized time-frequency image dataset (.npy), mean and standard deviation of the images (.npy), mean heatmap of the unstandardized and standardized images.
+
+
+
+
 
 <!-- ROADMAP -->
 ## Roadmap
