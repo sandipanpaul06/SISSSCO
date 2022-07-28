@@ -156,7 +156,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    /Users/user/Desktop/SISSSCO/Datasets/Neutral
    ```
    ```sh
-   /Users/user/Desktop/SISSSCO/Datasets
+   /Users/user/Desktop/SISSSCO/Datasets/Sweep
    ```
    iv. The sweep .ms files have a prefix "CEU_sweep", and the neutral .ms files have a prefix "CEU_neut", followed by consecutive numbers from 1 to 100. Example:
    ```sh
@@ -203,12 +203,12 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    ```
 
 
- D. Run wavelet_decomposition.py to generate summary statistics:
+ D. Run wavelet_decomposition.py to time-frequency imagee dataset for wavelet decomposition:
 
    i. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
    
 
-   ii. Command to view the necessary arguments, run:
+   ii. To view the necessary arguments, run:
    ```sh
    python wavelet_decomposition.py -h
    ```
@@ -230,7 +230,39 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    ```
 
 
-   iv. Output files will be saved in "TFA" folder. The files are: standardized time-frequency image dataset (.npy), mean and standard deviation of the images (.npy), mean heatmap of the unstandardized and standardized images.
+   iv. Output files will be saved in "TFA" folder. The files are: standardized time-frequency image dataset (.npy), mean and standard deviation of the images (.npy), mean heatmap of the unstandardized and standardized images (.png).
+
+
+
+
+E. Run multitaper_analysis.py to time-frequency imagee dataset for multitaper spectral analysis:
+
+   i. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
+   
+
+   ii. To view the necessary arguments, run:
+   ```sh
+   python multitaper_analysis.py -h
+   ```
+<br />
+<div align="center">
+  <a href="https://github.com/sandipanpaul06/SISSSCO">
+    <img src="images/multitaper.png" alt="Logo" width="10000">
+  </a>
+</div>   
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+   iii. sweep_filename: name of the summary statistic file for class sweep, neutral_filename: name of the summary statistic file for class neutral, train = number of samples to be used for training, test = number of samples to be used for testing, val = number of samples to be used for validation. Train + Test + Val <= total number of samples in the summary statistic dataset. The same train, test and val must be used throughout the model training process.
+
+   iv. Example run with sample summary statistic file:
+
+   ```sh
+   python multitaper_analysis.py training_Sweep.csv training_Neutral.csv 60 20 20
+   ```
+
+
+   iv. Output files will be saved in "TFA" folder. The files are: standardized time-frequency image dataset (.npy), mean and standard deviation of the images (.npy), mean heatmap of the unstandardized and standardized images (.png).
 
 
 
