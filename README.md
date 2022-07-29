@@ -312,7 +312,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 1.6.2. Arguments are: train-test-validation split, training datasets for wavelet-multitaper-stockwell, testing datasets for wavelet-multitaper-stockwell, validation datasets for wavelet-multitaper-stockwell, and train-test-validation label files.
 
-1.6.3. Example run with sample summary statistic file:
+1.6.3. Example run with sample file:
 
    ```sh
    python save_model.py 60 20 20 X_train_wavelet.npy X_train_multitaper.npy X_train_stockwell.npy X_test_wavelet.npy X_test_multitaper.npy X_test_stockwell.npy X_val_wavelet.npy X_val_multitaper.npy X_val_stockwell.npy Y_train.npy Y_test.npy Y_val.npy
@@ -325,7 +325,31 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 2. Model testing:
 
-2.1. 
+2.1. Parsing a VCF file:
+
+2.1.1 To view the necessary arguments, run:
+   ```sh
+   python VCF_parser.py -h
+   ```
+   ```
+<br />
+<div align="center">
+  <a href="https://github.com/sandipanpaul06/SISSSCO">
+    <img src="images/sumstatvcf.png" alt="Logo" width="10000">
+  </a>
+</div>   
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+2.1.3. Arguments are: train-test-validation split, training datasets for wavelet-multitaper-stockwell, testing datasets for wavelet-multitaper-stockwell, validation datasets for wavelet-multitaper-stockwell, and train-test-validation label files.
+
+
+
+2.1.3.  Example run with sample file:
+
+   ```sh
+   python VCF_parser.py CEU22.vcf
+   ```
 
 
 

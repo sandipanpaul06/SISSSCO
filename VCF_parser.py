@@ -10,22 +10,21 @@ import os
 import argparse
 
 parser = argparse.ArgumentParser(description= 'Parse VCF file')
-parser.add_argument('value', type=str, help= 'VCF file name')
-parser.add_argument('subfolder', type=str, help= 'Subfolder name where the VCF file is stored')
+parser.add_argument('name', type=str, help= 'VCF file name')
 args = parser.parse_args()
 
 
 # In[40]:
 
 
-val = args.value
-sub = args.subfolder
+val = args.name
+
 
 
 # In[33]:
 
 path_1 = os.getcwd()
-path = path_1 + "/" + str(sub) + "/" + str(val)
+path = path_1 + "/VCF/" + str(val)
 with open(path, 'r') as file:
     text = file.readlines()
 
@@ -110,7 +109,7 @@ for i in range(len(text)):
 # In[37]:
 
 
-np.save("parsed_" + str(val) + "_positions", np.array(pos))
+np.save("Parsed_VCF/parsed_" + str(val[:-4]) + "_positions", np.array(pos))
 
 
 # In[38]:
@@ -131,7 +130,7 @@ df = dataframe.drop(0, 1)
 
 
 num = df.to_numpy()
-np.save("parsed_" + str(val), num)
+np.save("Parsed_VCF/parsed_" + str(val[:-4]), num)
 
 
 # In[ ]:
