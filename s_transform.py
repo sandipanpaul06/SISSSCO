@@ -326,7 +326,7 @@ Y_val_1 = np.array(y_val)
 
 np.save("TFA/X_train_stockwell", X_train_1)
 np.save("TFA/X_test_stockwell", X_test_1)
-np.save("TFAX_val_stockwell", X_val_1)
+np.save("TFA/X_val_stockwell", X_val_1)
 #np.save("Y_train", Y_train_1)
 #np.save("Y_test", Y_test_1)
 #np.save("Y_val", Y_val_1)

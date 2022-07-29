@@ -1,26 +1,35 @@
 import numpy as np
+import os 
 
 
 
 import argparse
 
 parser = argparse.ArgumentParser(description= 'Train the model')
-parser.add_argument('TFA_folder', type=str, help= 'Time-frequency dataset folder name')
-parser.add_argument('S_train', type=str, help= 'S transform training file name')
-parser.add_argument('M_train', type=str, help= 'Multitaper training file name')
+
+parser.add_argument('train', type=int, help= '# of Training samples')
+parser.add_argument('test', type=int, help= '# of Test samples')
+parser.add_argument('val', type=int, help= '# of validation samples')
+
 parser.add_argument('W_train', type=str, help= 'Wavelet training file name')
+parser.add_argument('M_train', type=str, help= 'Multitaper training file name')
+parser.add_argument('S_train', type=str, help= 'S transform training file name')
 
-parser.add_argument('S_test', type=str, help= 'S transform testing file name')
-parser.add_argument('M_test', type=str, help= 'Multitaper testing file name')
 parser.add_argument('W_test', type=str, help= 'Wavelet testing file name')
+parser.add_argument('M_test', type=str, help= 'Multitaper testing file name')
+parser.add_argument('S_test', type=str, help= 'S transform testing file name')
 
-parser.add_argument('S_val', type=str, help= 'S transform validation file name')
-parser.add_argument('M_val', type=str, help= 'Multitaper validation file name')
+
 parser.add_argument('W_val', type=str, help= 'Wavelet validation file name')
+parser.add_argument('M_val', type=str, help= 'Multitaper validation file name')
+parser.add_argument('S_val', type=str, help= 'S transform validation file name')
 
-parser.add_argument('train', type=int, help= 'Training samples')
-parser.add_argument('test', type=int, help= 'Test samples')
-parser.add_argument('val', type=int, help= 'validation samples')
+
+parser.add_argument('y_train', type=str, help= 'Training dataset labels')
+parser.add_argument('y_test', type=str, help= 'Testing dataset labels')
+parser.add_argument('y_val', type=str, help= 'Validation dataset labels')
+
+
 
 
 args = parser.parse_args()
@@ -32,7 +41,6 @@ args = parser.parse_args()
 # In[40]:
 
 
-TFA = args.TFA_folder
 s_tr = args.S_train
 m_tr = args.M_train
 w_tr = args.W_train
@@ -50,7 +58,9 @@ tr_n = args.train
 ts_n = args.test
 vl_n = args.val
 
-
+y_tr = args.y_train
+y_ts = args.y_test
+y_vl = args.y_val
 
 
 # In[33]:
@@ -64,12 +74,12 @@ path1 = os.getcwd()
 
 
 
-X_train_0 = np.load(path1 + '/' + TFA + '/' + s_tr)
-X_test_0 = np.load(path1 + '/' + TFA + '/' + s_ts)
-X_val_0 = np.load(path1 + '/' + TFA + '/' + s_vl)
-Y_train_0 = np.load(path1 + '/' + TFA + '/' + y_tr)
-Y_test_0 = np.load(path1 + '/' + TFA + '/' + y_ts)
-Y_val_0 = np.load(path1 + '/' + TFA + '/' + y_vl)
+X_train_0 = np.load(path1 + '/TFA/' + s_tr)
+X_test_0 = np.load(path1 + '/TFA/' + s_ts)
+X_val_0 = np.load(path1 + '/TFA/' + s_vl)
+Y_train_0 = np.load(path1 + '/TFA/' + y_tr)
+Y_test_0 = np.load(path1 + '/TFA/' + y_ts)
+Y_val_0 = np.load(path1 + '/TFA/' + y_vl)
 
 
 ####
@@ -153,7 +163,7 @@ model0_0 = Model(inputs0_0, m0_0)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model0_0.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model0_0.fit(X_9_stockwell_train[0], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[0], Y_val_0), shuffle=False )
+history1 = model0_0.fit(X_9_stockwell_train[0], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[0], Y_val_0), shuffle=False, verbose = 0 )
 
 
 
@@ -190,7 +200,7 @@ model0_1 = Model(inputs0_1, m0_1)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model0_1.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model0_1.fit(X_9_stockwell_train[1], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[1], Y_val_0), shuffle=False )
+history1 = model0_1.fit(X_9_stockwell_train[1], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[1], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -228,7 +238,7 @@ model0_2 = Model(inputs0_2, m0_2)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model0_2.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model0_2.fit(X_9_stockwell_train[2], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[2], Y_val_0), shuffle=False )
+history1 = model0_2.fit(X_9_stockwell_train[2], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[2], Y_val_0), shuffle=False, verbose = 0 )
 
 
 
@@ -266,7 +276,7 @@ model0_3 = Model(inputs0_3, m0_3)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model0_3.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model0_3.fit(X_9_stockwell_train[3], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[3], Y_val_0), shuffle=False )
+history1 = model0_3.fit(X_9_stockwell_train[3], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[3], Y_val_0), shuffle=False, verbose = 0 )
 
 
 
@@ -304,7 +314,7 @@ model0_4 = Model(inputs0_4, m0_4)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model0_4.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model0_4.fit(X_9_stockwell_train[4], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[4], Y_val_0), shuffle=False )
+history1 = model0_4.fit(X_9_stockwell_train[4], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[4], Y_val_0), shuffle=False, verbose = 0 )
 
 
 
@@ -341,7 +351,7 @@ model0_5 = Model(inputs0_5, m0_5)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model0_5.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model0_5.fit(X_9_stockwell_train[5], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[5], Y_val_0), shuffle=False )
+history1 = model0_5.fit(X_9_stockwell_train[5], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[5], Y_val_0), shuffle=False, verbose = 0 )
 
 
 
@@ -378,7 +388,7 @@ model0_6 = Model(inputs0_6, m0_6)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model0_6.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model0_6.fit(X_9_stockwell_train[6], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[6], Y_val_0), shuffle=False )
+history1 = model0_6.fit(X_9_stockwell_train[6], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[6], Y_val_0), shuffle=False, verbose = 0 )
 
 
 
@@ -417,7 +427,7 @@ model0_7 = Model(inputs0_7, m0_7)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model0_7.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model0_7.fit(X_9_stockwell_train[7], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[7], Y_val_0), shuffle=False )
+history1 = model0_7.fit(X_9_stockwell_train[7], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[7], Y_val_0), shuffle=False, verbose = 0 )
 
 
 
@@ -454,7 +464,7 @@ model0_8 = Model(inputs0_8, m0_8)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model0_8.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model0_8.fit(X_9_stockwell_train[8], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[8], Y_val_0), shuffle=False )
+history1 = model0_8.fit(X_9_stockwell_train[8], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_stockwell_val[8], Y_val_0), shuffle=False, verbose = 0 )
 
 
 
@@ -469,9 +479,9 @@ for layer in model0_8.layers[:-2]: # go through until last layer
     
 ########
 
-X_train_1 = np.load(path1 + '/' + TFA + '/' + m_tr)
-X_test_1 = np.load(path1 + '/' + TFA + '/' + m_ts)
-X_val_1 = np.load(path1 + '/' + TFA + '/' + m_vl)
+X_train_1 = np.load(path1 + '/TFA/' + m_tr)
+X_test_1 = np.load(path1 + '/TFA/' + m_ts)
+X_val_1 = np.load(path1 + '/TFA/' + m_vl)
 
 
 a = np.zeros((2*tr_n, 65, 128, 1))
@@ -536,7 +546,7 @@ model1_0 = Model(inputs1_0, m1_0)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model1_0.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model1_0.fit(X_9_multitaper_train[0], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[0], Y_val_0), shuffle=False )
+history1 = model1_0.fit(X_9_multitaper_train[0], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[0], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -574,7 +584,7 @@ model1_1 = Model(inputs1_1, m1_1)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model1_1.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model1_1.fit(X_9_multitaper_train[1], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[1], Y_val_0), shuffle=False )
+history1 = model1_1.fit(X_9_multitaper_train[1], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[1], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -612,7 +622,7 @@ model1_2 = Model(inputs1_2, m1_2)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model1_2.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model1_2.fit(X_9_multitaper_train[2], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[2], Y_val_0), shuffle=False )
+history1 = model1_2.fit(X_9_multitaper_train[2], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[2], Y_val_0), shuffle=False, verbose = 0 )
 
 
 
@@ -651,7 +661,7 @@ model1_3 = Model(inputs1_3, m1_3)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model1_3.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model1_3.fit(X_9_multitaper_train[3], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[3], Y_val_0), shuffle=False )
+history1 = model1_3.fit(X_9_multitaper_train[3], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[3], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -688,7 +698,7 @@ model1_4 = Model(inputs1_4, m1_4)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model1_4.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model1_4.fit(X_9_multitaper_train[4], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[4], Y_val_0), shuffle=False )
+history1 = model1_4.fit(X_9_multitaper_train[4], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[4], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -725,7 +735,7 @@ model1_5 = Model(inputs1_5, m1_5)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model1_5.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model1_5.fit(X_9_multitaper_train[5], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[5], Y_val_0), shuffle=False )
+history1 = model1_5.fit(X_9_multitaper_train[5], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[5], Y_val_0), shuffle=False, verbose = 0 )
 
 
 
@@ -761,7 +771,7 @@ model1_6 = Model(inputs1_6, m1_6)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model1_6.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model1_6.fit(X_9_multitaper_train[6], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[6], Y_val_0), shuffle=False )
+history1 = model1_6.fit(X_9_multitaper_train[6], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[6], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -798,7 +808,7 @@ model1_7 = Model(inputs1_7, m1_7)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model1_7.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model1_7.fit(X_9_multitaper_train[7], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[7], Y_val_0), shuffle=False )
+history1 = model1_7.fit(X_9_multitaper_train[7], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[7], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -835,7 +845,7 @@ model1_8 = Model(inputs1_8, m1_8)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model1_8.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model1_8.fit(X_9_multitaper_train[8], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[8], Y_val_0), shuffle=False )
+history1 = model1_8.fit(X_9_multitaper_train[8], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_multitaper_val[8], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -850,12 +860,12 @@ for layer in model1_8.layers[:-2]: # go through until last layer
 
 ########
 
-X_train_2 = np.load(path1 + '/' + TFA + '/' + w_tr)
-X_test_2 = np.load(path1 + '/' + TFA + '/' + w_ts)
-X_val_2 = np.load(path1 + '/' + TFA + '/' + w_vl)
+X_train_2 = np.load(path1 + '/TFA/' + w_tr)
+X_test_2 = np.load(path1 + '/TFA/' + w_ts)
+X_val_2 = np.load(path1 + '/TFA/' + w_vl)
 
 
-a = np.zeros((2*tr, 65, 128, 1))
+a = np.zeros((2*tr_n, 65, 128, 1))
 
 X_9_wavelet_train = []
 
@@ -917,7 +927,7 @@ model2_0 = Model(inputs2_0, m2_0)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model2_0.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model2_0.fit(X_9_wavelet_train[0], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[0], Y_val_0), shuffle=False )
+history1 = model2_0.fit(X_9_wavelet_train[0], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[0], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -957,7 +967,7 @@ model2_1 = Model(inputs2_1, m2_1)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model2_1.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model2_1.fit(X_9_wavelet_train[1], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[1], Y_val_0), shuffle=False )
+history1 = model2_1.fit(X_9_wavelet_train[1], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[1], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -997,7 +1007,7 @@ model2_2 = Model(inputs2_2, m2_2)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model2_2.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model2_2.fit(X_9_wavelet_train[2], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[2], Y_val_0), shuffle=False )
+history1 = model2_2.fit(X_9_wavelet_train[2], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[2], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -1036,7 +1046,7 @@ model2_3 = Model(inputs2_3, m2_3)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model2_3.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model2_3.fit(X_9_wavelet_train[3], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[3], Y_val_0), shuffle=False )
+history1 = model2_3.fit(X_9_wavelet_train[3], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[3], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -1075,7 +1085,7 @@ model2_4 = Model(inputs2_4, m2_4)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model2_4.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model2_4.fit(X_9_wavelet_train[4], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[4], Y_val_0), shuffle=False )
+history1 = model2_4.fit(X_9_wavelet_train[4], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[4], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -1115,7 +1125,7 @@ model2_5 = Model(inputs2_5, m2_5)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model2_5.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model2_5.fit(X_9_wavelet_train[5], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[5], Y_val_0), shuffle=False )
+history1 = model2_5.fit(X_9_wavelet_train[5], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[5], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -1155,7 +1165,7 @@ model2_6 = Model(inputs2_6, m2_6)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model2_6.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model2_6.fit(X_9_wavelet_train[6], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[6], Y_val_0), shuffle=False )
+history1 = model2_6.fit(X_9_wavelet_train[6], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[6], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -1195,7 +1205,7 @@ model2_7 = Model(inputs2_7, m2_7)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model2_7.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model2_7.fit(X_9_wavelet_train[7], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[7], Y_val_0), shuffle=False )
+history1 = model2_7.fit(X_9_wavelet_train[7], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[7], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -1235,7 +1245,7 @@ model2_8 = Model(inputs2_8, m2_8)
 
 opt1 = Adam(learning_rate=0.0001, epsilon=1e-06)
 history = model2_8.compile(loss="categorical_crossentropy",  metrics=['accuracy'])
-history1 = model2_8.fit(X_9_wavelet_train[8], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[8], Y_val_0), shuffle=False )
+history1 = model2_8.fit(X_9_wavelet_train[8], Y_train_0, batch_size=batchSize, epochs=iterations, validation_data= (X_9_wavelet_val[8], Y_val_0), shuffle=False , verbose = 0)
 
 
 
@@ -1297,6 +1307,8 @@ history1 = finalModel.fit([X_9_stockwell_train[0], X_9_stockwell_train[1], X_9_s
 
 finalModel.save("saved_model_SISSSCO")
 prediction = finalModel.predict([X_9_stockwell_test[0], X_9_stockwell_test[1], X_9_stockwell_test[2], X_9_stockwell_test[3], X_9_stockwell_test[4], X_9_stockwell_test[5], X_9_stockwell_test[6], X_9_stockwell_test[7], X_9_stockwell_test[8], X_9_multitaper_test[0], X_9_multitaper_test[1], X_9_multitaper_test[2], X_9_multitaper_test[3], X_9_multitaper_test[4], X_9_multitaper_test[5], X_9_multitaper_test[6], X_9_multitaper_test[7], X_9_multitaper_test[8], X_9_wavelet_test[0], X_9_wavelet_test[1], X_9_wavelet_test[2], X_9_wavelet_test[3], X_9_wavelet_test[4], X_9_wavelet_test[5], X_9_wavelet_test[6], X_9_wavelet_test[7], X_9_wavelet_test[8]])
+
+
 
 np.savetxt("test_prediction.csv", prediction, delimiter = ",")
 

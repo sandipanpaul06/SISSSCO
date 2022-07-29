@@ -136,29 +136,29 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-1. Creating training and testing datasets:
+1. Data preprocessing and model training:
 
- A. Open terminal and go to SISSSCO software directory. Example:
+1.1. Open terminal and go to SISSSCO software directory. Example:
    ```sh
    cd /Users/sarnab2020/Desktop/git_sisssco
    ```
 
- B. .ms output fles:
+1.2. .ms output fles:
 
-   i. The .ms files are located in "Datasets" folder in the SISSSCO software directory. For example:
+1.2.1. The .ms files are located in "Datasets" folder in the SISSSCO software directory. For example:
    ```sh
    /Users/user/Desktop/SISSSCO/Datasets
    ```
-   ii. The "Datasets" folder has two sub-folders: "Neutral" and "Sweep". The neutral .ms files need to be placed in the "Neutral" folder, and the sweep .ms files need to be placed in the "Sweep" folder.
+1.2.2. The "Datasets" folder has two sub-folders: "Neutral" and "Sweep". The neutral .ms files need to be placed in the "Neutral" folder, and the sweep .ms files need to be placed in the "Sweep" folder.
 
-   iii. 100 sample files each can be found in the "Neutral" and "Sweep" subfolders. These files can be accessed by (example directory):
+1.2.3. 100 sample files each can be found in the "Neutral" and "Sweep" subfolders. These files can be accessed by (example directory):
    ```sh
    /Users/user/Desktop/SISSSCO/Datasets/Neutral
    ```
    ```sh
    /Users/user/Desktop/SISSSCO/Datasets/Sweep
    ```
-   iv. The sweep .ms files have a prefix "CEU_sweep", and the neutral .ms files have a prefix "CEU_neut", followed by consecutive numbers from 1 to 100. Example:
+1.2.4. The sweep .ms files have a prefix "CEU_sweep", and the neutral .ms files have a prefix "CEU_neut", followed by consecutive numbers from 1 to 100. Example:
    ```sh
    CEU_sweep_1.ms, CEU_sweep_2.ms ... CEU_sweep_100.ms
    ```
@@ -166,9 +166,9 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    CEU_neut_1.ms, CEU_neut_2.ms ... CEU_neut_100.ms
    ```
 
- C. Run sum_stat_ms.py to generate summary statistics:
+1.3. Run sum_stat_ms.py to generate summary statistics:
 
-   i. Command to view the necessary arguments, run:
+1.3.1. Command to view the necessary arguments, run:
    ```sh
    python sum_stat_ms.py -h
    ```
@@ -181,9 +181,9 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-   ii. pref: .ms file prefix, class_type: 1 for sweep or 0 for neutral, number: number of simulations (numbered consecutively starting from 1)
+1.3.2. pref: .ms file prefix, class_type: 1 for sweep or 0 for neutral, number: number of simulations (numbered consecutively starting from 1)
 
-   iii. Example run with sample .ms files:
+1.3.3. Example run with sample .ms files:
 
    ```sh
    sum_stat_ms.py CEU_neut 0 100
@@ -192,7 +192,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    sum_stat_ms.py CEU_sweep 1 100
    ```
 
-   iv. Output file will be saved in "Summary_statistics" folder and output message will print the size of the dataset (number of qualified samples, 1152):
+1.3.4. Output file will be saved in "Summary_statistics" folder and output message will print the size of the dataset (number of qualified samples, 1152):
    ```sh
    dataset shape :  (100, 1152)
    ```
@@ -203,12 +203,12 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    ```
 
 
- D. Run wavelet_decomposition.py to time-frequency imagee dataset for wavelet decomposition:
+1.4. Run wavelet_decomposition.py to time-frequency imagee dataset for wavelet decomposition:
 
-   i. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
+1.4.1. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
    
 
-   ii. To view the necessary arguments, run:
+1.4.2. To view the necessary arguments, run:
    ```sh
    python wavelet_decomposition.py -h
    ```
@@ -221,26 +221,26 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-   iii. sweep_filename: name of the summary statistic file for class sweep, neutral_filename: name of the summary statistic file for class neutral, train = number of samples to be used for training, test = number of samples to be used for testing, val = number of samples to be used for validation. Train + Test + Val <= total number of samples in the summary statistic dataset. The same train, test and val must be used throughout the model training process.
+1.4.3. sweep_filename: name of the summary statistic file for class sweep, neutral_filename: name of the summary statistic file for class neutral, train = number of samples to be used for training, test = number of samples to be used for testing, val = number of samples to be used for validation. Train + Test + Val <= total number of samples in the summary statistic dataset. The same train, test and val must be used throughout the model training process.
 
-   iv. Example run with sample summary statistic file:
+1.4.4. Example run with sample summary statistic file:
 
    ```sh
    python wavelet_decomposition.py training_Sweep.csv training_Neutral.csv 60 20 20
    ```
 
 
-   iv. Output files will be saved in "TFA" folder. The files are: standardized time-frequency image dataset (.npy), mean and standard deviation of the images (.npy), mean heatmap of the unstandardized and standardized images (.png).
+1.4.5. Output files will be saved in "TFA" folder. The files are: standardized time-frequency image dataset (.npy), mean and standard deviation of the images (.npy), mean heatmap of the unstandardized and standardized images (.png).
 
 
 
 
-E. Run multitaper_analysis.py to time-frequency imagee dataset for S transform:
+1.5. Run multitaper_analysis.py to time-frequency imagee dataset for S transform:
 
-   i. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
+1.5.1. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
    
 
-   ii. To view the necessary arguments, run:
+1.5.2. To view the necessary arguments, run:
    ```sh
    python s_transform.py -h
    ```
@@ -253,9 +253,9 @@ E. Run multitaper_analysis.py to time-frequency imagee dataset for S transform:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-   iii. sweep_filename: name of the summary statistic file for class sweep, neutral_filename: name of the summary statistic file for class neutral, train = number of samples to be used for training, test = number of samples to be used for testing, val = number of samples to be used for validation. Train + Test + Val <= total number of samples in the summary statistic dataset. The same train, test and val must be used throughout the model training process.
+1.5.3. sweep_filename: name of the summary statistic file for class sweep, neutral_filename: name of the summary statistic file for class neutral, train = number of samples to be used for training, test = number of samples to be used for testing, val = number of samples to be used for validation. Train + Test + Val <= total number of samples in the summary statistic dataset. The same train, test and val must be used throughout the model training process.
 
-   iv. Example run with sample summary statistic file:
+1.5.4. Example run with sample summary statistic file:
 
    ```sh
    python s_transform.py training_Sweep.csv training_Neutral.csv 60 20 20
@@ -265,41 +265,73 @@ E. Run multitaper_analysis.py to time-frequency imagee dataset for S transform:
    iv. Output files will be saved in "TFA" folder. The files are: standardized time-frequency image dataset (.npy), mean and standard deviation of the images (.npy), mean heatmap of the unstandardized and standardized images (.png).
 
 
+1.5. Run multitaper_analysis.py to time-frequency imagee dataset for S transform:
+
+1.5.1. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
+   
+
+1.5.2. To view the necessary arguments, run:
+   ```sh
+   python s_transform.py -h
+   ```
+<br />
+<div align="center">
+  <a href="https://github.com/sandipanpaul06/SISSSCO">
+    <img src="images/stransform.png" alt="Logo" width="10000">
+  </a>
+</div>   
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+1.5.3. sweep_filename: name of the summary statistic file for class sweep, neutral_filename: name of the summary statistic file for class neutral, train = number of samples to be used for training, test = number of samples to be used for testing, val = number of samples to be used for validation. Train + Test + Val <= total number of samples in the summary statistic dataset. The same train, test and val must be used throughout the model training process.
+
+1.5.4. Example run with sample summary statistic file:
+
+   ```sh
+   python s_transform.py training_Sweep.csv training_Neutral.csv 60 20 20
+   ```
 
 
+1.5.5. Output files will be saved in "TFA" folder. The files are: standardized time-frequency image dataset (.npy), mean and standard deviation of the images (.npy), mean heatmap of the unstandardized and standardized images (.png).
 
-<!-- ROADMAP -->
-## Roadmap
+1.6. Train and save the model:
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+1.6.1. To view the necessary arguments, run:
+   ```sh
+   python save_model.py -h
+   ```
+   ```
+<br />
+<div align="center">
+  <a href="https://github.com/sandipanpaul06/SISSSCO">
+    <img src="images/save_model.png" alt="Logo" width="10000">
+  </a>
+</div>   
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+1.6.2. Arguments are: train-test-validation split, training datasets for wavelet-multitaper-stockwell, testing datasets for wavelet-multitaper-stockwell, validation datasets for wavelet-multitaper-stockwell, and train-test-validation label files.
+
+1.6.3. Example run with sample summary statistic file:
+
+   ```sh
+   python save_model.py 60 20 20 X_train_wavelet.npy X_train_multitaper.npy X_train_stockwell.npy X_test_wavelet.npy X_test_multitaper.npy X_test_stockwell.npy X_val_wavelet.npy X_val_multitaper.npy X_val_stockwell.npy Y_train.npy Y_test.npy Y_val.npy
+   ```
 
 
-<!-- CONTRIBUTING -->
-## Contributing
+1.6.4. Model will be saved as "saved_model", and test dataset predictions will be saved as "test_prediction.npy" in the SISSSCO software directory. 
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Model testing:
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+2.1. 
+
+
+
+
+
+
 
 
 
@@ -315,9 +347,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Sandipan Paul Arnab - sarnab2020@fau.edu
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -328,14 +360,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
