@@ -339,7 +339,6 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
   </a>
 </div>   
 
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 * 2.1.2. Arguments are: name of the vcf file
 
