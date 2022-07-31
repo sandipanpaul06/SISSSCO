@@ -80,6 +80,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+* Abstract: 
+
 Natural selection leaves a spatial pattern along the genome, with a distortion in the haplotype distribution near the selected locus that becomes less prominent with increasing distance from the locus. Evaluating the spatial signal of a population-genetic summary statistic across the genome allows for patterns of natural selection to be distinguished from neutrality. Different summary statistics highlight diverse components of genetic variation and, therefore, considering the genomic spatial distribution of multiple summary statistics is expected to aid in uncovering subtle signatures of selection. In recent years, numerous methods have been devised that jointly consider genomic spatial distributions across summary statistics, utilizing both classical machine learning and contemporary deep learning architectures. However, better predictions may be attainable by improving the way in which features used as input to machine learning algorithms are extracted from these summary statistics. To achieve this goal, we apply three time-frequency analysis approaches (wavelet, multitaper, and S-transform analyses) to summary statistic signals. Each analysis method converts a one-dimensional summary statistic signal to a two-dimensional image of spectral density or visual representation of time-frequency analysis, permitting the simultaneous representation of temporal and spectral information. We use these images as input to convolutional neural networks and consider combining models across different time-frequency representation approaches through the ensemble stacking technique. Application of our modeling framework to data simulated from neutral and selective sweep scenarios reveals that it achieves almost perfect accuracy and power across a diverse set of evolutionary settings, including population size changes and test sets for which sweep strength, softness, and timing parameters were drawn from a wide range. Given that this modeling framework is also robust to missing data, we believe that it will represent a welcome addition to the population-genomic toolkit for learning about adaptive processes from genomic data.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -300,7 +302,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    ```sh
    python save_model.py -h
    ```
-   ```
+
 <br />
 <div align="center">
   <a href="https://github.com/sandipanpaul06/SISSSCO">
@@ -308,7 +310,6 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
   </a>
 </div>   
 
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 * 1.6.2. Arguments are: train-test-validation split, training datasets for wavelet-multitaper-stockwell, testing datasets for wavelet-multitaper-stockwell, validation datasets for wavelet-multitaper-stockwell, and train-test-validation label files.
 
@@ -319,7 +320,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    ```
 
 
-* 1.6.4. Model will be saved as "saved_model", and test dataset predictions will be saved as "test_prediction.npy" in the SISSSCO software directory. 
+* 1.6.4. Model will be saved as "saved_model", and test dataset predictions will be saved as "test_prediction.csv" in the SISSSCO software directory. 
 
 
 
@@ -331,7 +332,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    ```sh
    python VCF_parser.py -h
    ```
-   ```
+   
 <br />
 <div align="center">
   <a href="https://github.com/sandipanpaul06/SISSSCO">
@@ -359,7 +360,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    ```sh
    python sum_stat_vcf.py -h
    ```
-   ```
+
 <br />
 <div align="center">
   <a href="https://github.com/sandipanpaul06/SISSSCO">
@@ -377,14 +378,26 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    python sum_stat_vcf.py parsed_CEU22.vcf
    ```
 
-* 2.2.4 Output will be saved in "Summary_statistics" folder.
+* 2.2.4 Output will be saved in "Summary_statistics" folder. Please note down the number of qualified samples from the shape of the file as discussed in 1.3.4.
 
 
 * 2.3 Generate time-frequency images: Same as 1.4, 1.5, 1.6
 
-* 2.4 
+* 2.4 Run save_model.py to get the empirical prediction:
 
+  * 2.4.1 To view the necessary arguments, run:
+   ```sh
+   python save_model.py -h
 
+<br />
+<div align="center">
+  <a href="https://github.com/sandipanpaul06/SISSSCO">
+    <img src="images/runsavedmodel.png" alt="Logo" width="10000">
+  </a>
+</div>  
+
+  * Arguments are: wavelet, multitaper and stockwell image datasets and number of qualified samples from 2.2.4
+  * Predictions will be saved as "test_prediction.csv" in the SISSSCO software directory. 
 
 
 <!-- LICENSE -->

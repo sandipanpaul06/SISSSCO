@@ -3,7 +3,7 @@ import numpy as np
 
 
 
-mport argparse
+import argparse
 
 parser = argparse.ArgumentParser(description= 'Test model on empirical data')
 parser.add_argument('S_test', type=str, help= 'S transform empirical file name')

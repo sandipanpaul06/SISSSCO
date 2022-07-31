@@ -308,6 +308,8 @@ summary_stat_1152.shape
 # In[28]:
 df = pd.DataFrame(summary_stat_1152)
 
+print("dataset shape : " , df.shape)
+
 df.to_csv(path_1 + '/Summary_statistics/' +'empirical_'+ val[6:-4]+ '.csv', index=False, header= False)
 #np.save('"Summary_statistics/sumstat_" + val[5:-4]', summary_stat_1152)
 
