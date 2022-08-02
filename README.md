@@ -164,6 +164,11 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 * 1.3. Run sum_stat_ms.py to generate summary statistics:
 
+Open terminal and go to SISSSCO software directory. Example:
+   ```sh
+   cd /Users/user/Desktop/SISSSCO
+   ```
+
 * 1.3.1. Command to view the necessary arguments, run:
    ```sh
    python sum_stat_ms.py -h
@@ -182,10 +187,10 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 * 1.3.3. Example run with sample .ms files:
 
    ```sh
-   sum_stat_ms.py CEU_neut 0 100
+   python sum_stat_ms.py CEU_neut 0 100
    ```
    ```sh
-   sum_stat_ms.py CEU_sweep 1 100
+   python sum_stat_ms.py CEU_sweep 1 100
    ```
 
 * 1.3.4. Output file will be saved in "Summary_statistics" folder and output message will print the size of the dataset (number of qualified samples, 9 summary statistics * 128 windows):
@@ -201,7 +206,12 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    ```
 
 
-* 1.4. Run wavelet_decomposition.py to time-frequency imagee dataset for wavelet decomposition:
+* 1.4. Run wavelet_decomposition.py to time-frequency images dataset for wavelet decomposition:
+
+Open terminal and go to SISSSCO software directory. Example:
+   ```sh
+   cd /Users/user/Desktop/SISSSCO
+   ```
 
 * 1.4.1. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
    
@@ -235,6 +245,11 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 * 1.5. Run multitaper_analysis.py to time-frequency images dataset for S transform:
 
+Open terminal and go to SISSSCO software directory. Example:
+   ```sh
+   cd /Users/user/Desktop/SISSSCO
+   ```
+
 * 1.5.1. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
    
 
@@ -264,6 +279,11 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 
 * 1.5. Run multitaper_analysis.py to time-frequency imagee dataset for S transform:
+
+Open terminal and go to SISSSCO software directory. Example:
+   ```sh
+   cd /Users/user/Desktop/SISSSCO
+   ```
 
 * 1.5.1. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
    
