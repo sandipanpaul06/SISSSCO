@@ -189,6 +189,8 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    ```
 
 * 1.3.4. Output file will be saved in "Summary_statistics" folder and output message will print the size of the dataset (number of qualified samples, 9 summary statistics * 128 windows):
+   
+   Neutral:
    ```sh
    dataset shape :  (100, 1152)
    ```
@@ -231,7 +233,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 
 
-* 1.5. Run multitaper_analysis.py to time-frequency imagee dataset for S transform:
+* 1.5. Run multitaper_analysis.py to time-frequency images dataset for S transform:
 
 * 1.5.1. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
    
@@ -249,7 +251,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-* 1.5.3. sweep_filename: name of the summary statistic file for class sweep, neutral_filename: name of the summary statistic file for class neutral, train = number of samples to be used for training, test = number of samples to be used for testing, val = number of samples to be used for validation. Train + Test + Val <= total number of samples in the summary statistic dataset. The same train, test and val must be used throughout the model training process.
+* 1.5.3. Arguments: sweep_filename: name of the summary statistic file for class sweep, neutral_filename: name of the summary statistic file for class neutral, train = number of samples to be used for training, test = number of samples to be used for testing, val = number of samples to be used for validation. Train + Test + Val <= total number of samples in the summary statistic dataset. The same train, test and val must be used throughout the model training process.
 
 * 1.5.4. Example run with sample summary statistic file:
 
