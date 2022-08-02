@@ -114,7 +114,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 1. Clone the repo
    ```sh
-   https://github.com/sandipanpaul06/SISSSCO.git
+   Git clone https://github.com/sandipanpaul06/SISSSCO.git
    ```
 3. Package installation
    ```sh
