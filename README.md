@@ -136,7 +136,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 * 1.1. Open terminal and go to SISSSCO software directory. Example:
    ```sh
-   cd /Users/user/Desktop/git_sisssco
+   cd /Users/user/Desktop/SISSSCO
    ```
 
 * 1.2. .ms output fles:
@@ -188,7 +188,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
    sum_stat_ms.py CEU_sweep 1 100
    ```
 
-* 1.3.4. Output file will be saved in "Summary_statistics" folder and output message will print the size of the dataset (number of qualified samples, 1152):
+* 1.3.4. Output file will be saved in "Summary_statistics" folder and output message will print the size of the dataset (number of qualified samples, 9 summary statistics * 128 windows):
    ```sh
    dataset shape :  (100, 1152)
    ```
