@@ -243,7 +243,7 @@ Open terminal and go to SISSSCO software directory. Example:
 
 
 
-* 1.5. Run multitaper_analysis.py to time-frequency images dataset for S transform:
+* 1.5. Run multitaper_analysis.py to time-frequency images dataset for Multitaper Spectral Analysis:
 
 Open terminal and go to SISSSCO software directory. Example:
    ```sh
@@ -255,12 +255,12 @@ Open terminal and go to SISSSCO software directory. Example:
 
 * 1.5.2. To view the necessary arguments, run:
    ```sh
-   python s_transform.py -h
+   python multitaper_analysis.py -h
    ```
 <br />
 <div align="center">
   <a href="https://github.com/sandipanpaul06/SISSSCO">
-    <img src="images/stransform.png" alt="Logo" width="10000">
+    <img src="images/multitaper.png" alt="Logo" width="10000">
   </a>
 </div>   
 
@@ -271,24 +271,24 @@ Open terminal and go to SISSSCO software directory. Example:
 * 1.5.4. Example run with sample summary statistic file:
 
    ```sh
-   python s_transform.py training_Sweep.csv training_Neutral.csv 60 20 20
+   python multitaper_analysis.py training_Sweep.csv training_Neutral.csv 60 20 20
    ```
 
 
-   iv. Output files will be saved in "TFA" folder. The files are: standardized time-frequency image dataset (.npy), mean and standard deviation of the images (.npy), mean heatmap of the unstandardized and standardized images (.png).
+* 1.5.5. Output files will be saved in "TFA" folder. The files are: standardized time-frequency image dataset (.npy), mean and standard deviation of the images (.npy), mean heatmap of the unstandardized and standardized images (.png).
 
 
-* 1.5. Run s_transform.py to time-frequency imagee dataset for S transform:
+* 1.6. Run s_transform.py to time-frequency imagee dataset for S transform:
 
 Open terminal and go to SISSSCO software directory. Example:
    ```sh
    cd /Users/user/Desktop/SISSSCO
    ```
 
-* 1.5.1. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
+* 1.6.1. Constraint: the dataset shape of both neutral and sweep classes need to be the same. If not, the summary statistic dataset with higher number of qualified samples need to be resized to have the same size as the dataset with lower number of qualified samples.
    
 
-* 1.5.2. To view the necessary arguments, run:
+* 1.6.2. To view the necessary arguments, run:
    ```sh
    python s_transform.py -h
    ```
@@ -301,20 +301,26 @@ Open terminal and go to SISSSCO software directory. Example:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-* 1.5.3. sweep_filename: name of the summary statistic file for class sweep, neutral_filename: name of the summary statistic file for class neutral, train = number of samples to be used for training, test = number of samples to be used for testing, val = number of samples to be used for validation. Train + Test + Val <= total number of samples in the summary statistic dataset. The same train, test and val must be used throughout the model training process.
+* 1.6.3. sweep_filename: name of the summary statistic file for class sweep, neutral_filename: name of the summary statistic file for class neutral, train = number of samples to be used for training, test = number of samples to be used for testing, val = number of samples to be used for validation. Train + Test + Val <= total number of samples in the summary statistic dataset. The same train, test and val must be used throughout the model training process.
 
-* 1.5.4. Example run with sample summary statistic file:
+* 1.6.4. Example run with sample summary statistic file:
 
    ```sh
    python s_transform.py training_Sweep.csv training_Neutral.csv 60 20 20
    ```
 
 
-* 1.5.5. Output files will be saved in "TFA" folder. The files are: standardized time-frequency image dataset (.npy), mean and standard deviation of the images (.npy), mean heatmap of the unstandardized and standardized images (.png).
+* 1.6.5. Output files will be saved in "TFA" folder. The files are: standardized time-frequency image dataset (.npy), mean and standard deviation of the images (.npy), mean heatmap of the unstandardized and standardized images (.png).
 
 * 1.6. Train and save the model:
 
-* 1.6.1. To view the necessary arguments, run:
+* 1.7.1. To view the necessary arguments, run:
+
+Open terminal and go to SISSSCO software directory. Example:
+   ```sh
+   cd /Users/user/Desktop/SISSSCO
+   ```
+
    ```sh
    python save_model.py -h
    ```
@@ -327,22 +333,28 @@ Open terminal and go to SISSSCO software directory. Example:
 </div>   
 
 
-* 1.6.2. Arguments are: train-test-validation split, training datasets for wavelet-multitaper-stockwell, testing datasets for wavelet-multitaper-stockwell, validation datasets for wavelet-multitaper-stockwell, and train-test-validation label files.
+* 1.7.2. Arguments are: train-test-validation split, training datasets for wavelet-multitaper-stockwell, testing datasets for wavelet-multitaper-stockwell, validation datasets for wavelet-multitaper-stockwell, and train-test-validation label files.
 
-* 1.6.3. Example run with sample file:
+* 1.7.3. Example run with sample file:
 
    ```sh
    python save_model.py 60 20 20 X_train_wavelet.npy X_train_multitaper.npy X_train_stockwell.npy X_test_wavelet.npy X_test_multitaper.npy X_test_stockwell.npy X_val_wavelet.npy X_val_multitaper.npy X_val_stockwell.npy Y_train.npy Y_test.npy Y_val.npy
    ```
 
 
-* 1.6.4. Model will be saved as "saved_model", and test dataset predictions will be saved as "test_prediction.csv" in the SISSSCO software directory. 
+* 1.7.4. Model will be saved as "saved_model", and test dataset predictions will be saved as "test_prediction.csv" in the SISSSCO software directory. 
 
 
 
 2. Model testing:
 
 * 2.1. Parsing a VCF file:
+
+Open terminal and go to SISSSCO software directory. Example:
+   ```sh
+   cd /Users/user/Desktop/SISSSCO
+   ```
+
 
 * 2.1.1 To view the necessary arguments, run:
    ```sh
@@ -371,6 +383,12 @@ Open terminal and go to SISSSCO software directory. Example:
 
 
 * 2.2. Geneate summary statistics from parsed vcf file:
+
+Open terminal and go to SISSSCO software directory. Example:
+   ```sh
+   cd /Users/user/Desktop/SISSSCO
+   ```
+
 
 * 2.2.1 To view the necessary arguments, run:
    ```sh
