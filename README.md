@@ -136,7 +136,7 @@ Required python packages: pandas, tensorflow, numpy, PyWavelets, spectrum, stock
 
 * 1.1. Open terminal and go to SISSSCO software directory. Example:
    ```sh
-   cd /Users/sarnab2020/Desktop/git_sisssco
+   cd /Users/user/Desktop/git_sisssco
    ```
 
 * 1.2. .ms output fles:
