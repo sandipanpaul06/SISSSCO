@@ -278,7 +278,7 @@ Open terminal and go to SISSSCO software directory. Example:
    iv. Output files will be saved in "TFA" folder. The files are: standardized time-frequency image dataset (.npy), mean and standard deviation of the images (.npy), mean heatmap of the unstandardized and standardized images (.png).
 
 
-* 1.5. Run multitaper_analysis.py to time-frequency imagee dataset for S transform:
+* 1.5. Run s_transform.py to time-frequency imagee dataset for S transform:
 
 Open terminal and go to SISSSCO software directory. Example:
    ```sh
