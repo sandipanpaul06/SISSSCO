@@ -409,17 +409,89 @@ Open terminal and go to SISSSCO software directory. Example:
 * 2.2.3.  Example run with sample file:
 
    ```sh
-   python sum_stat_vcf.py parsed_CEU22.vcf
+   python sum_stat_vcf.py parsed_CEU22.npy
    ```
 
 * 2.2.4 Output will be saved in "Summary_statistics" folder. Please note down the number of qualified samples from the shape of the file as discussed in 1.3.4.
 
 
-* 2.3 Generate time-frequency images: Same as 1.4, 1.5, 1.6
+* 2.3 Run wavelet_decomposition_vcf.py on empirical summary statistic file: 
 
-* 2.4 Run save_model.py to get the empirical prediction:
+* 2.3.1. To view the necessary arguments, run:
+   ```sh
+   python wavelet_decomposition_vcf.py -h
+   ```
+<br />
+<div align="center">
+  <a href="https://github.com/sandipanpaul06/SISSSCO">
+    <img src="images/wavelet_vcf.png" alt="Logo" width="10000">
+  </a>
+</div>   
 
-  * 2.4.1 To view the necessary arguments, run:
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+* 2.3.2. filename: name of the empirical summary statistic file
+
+* 2.3.3. Example run with sample summary statistic file:
+
+   ```sh
+   python wavelet_decomposition_vcf.py empirical__CEU22.csv
+   ```
+
+
+* 2.4 Run multitaper_analysis_vcf.py on empirical summary statistic file: 
+
+* 2.4.1. To view the necessary arguments, run:
+   ```sh
+   python multitaper_analysis_vcf.py -h
+   ```
+<br />
+<div align="center">
+  <a href="https://github.com/sandipanpaul06/SISSSCO">
+    <img src="images/mutitaper_vcf.png" alt="Logo" width="10000">
+  </a>
+</div>   
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+* 2.4.2. filename: name of the empirical summary statistic file
+
+* 2.4.3. Example run with sample summary statistic file:
+
+   ```sh
+   python multitaper_analysis_vcf.py empirical__CEU22.csv
+   ```
+
+
+* 2.5 Run s_transform_vcf.py on empirical summary statistic file: 
+
+* 2.4.1. To view the necessary arguments, run:
+   ```sh
+   python s_transform_vcf.py -h
+   ```
+<br />
+<div align="center">
+  <a href="https://github.com/sandipanpaul06/SISSSCO">
+    <img src="images/stockwell_vcf.png" alt="Logo" width="10000">
+  </a>
+</div>   
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+* 2.4.2. filename: name of the empirical summary statistic file
+
+* 2.4.3. Example run with sample summary statistic file:
+
+   ```sh
+   python s_transform_vcf.py empirical__CEU22.csv
+   ```
+
+
+
+
+* 2.6 Run save_model.py to get the empirical prediction:
+
+  * 2.6.1 To view the necessary arguments, run:
    ```sh
    python save_model.py -h
 
