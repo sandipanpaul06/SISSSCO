@@ -448,7 +448,7 @@ Open terminal and go to SISSSCO software directory. Example:
 <br />
 <div align="center">
   <a href="https://github.com/sandipanpaul06/SISSSCO">
-    <img src="images/mutitaper_vcf.png" alt="Logo" width="10000">
+    <img src="images/multitaper_vcf.png" alt="Logo" width="10000">
   </a>
 </div>   
 
