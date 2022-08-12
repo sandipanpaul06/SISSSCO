@@ -489,11 +489,11 @@ Open terminal and go to SISSSCO software directory. Example:
 
 
 
-* 2.6 Run save_model.py to get the empirical prediction:
+* 2.6 Run run_saved_model.py to get the empirical prediction:
 
   * 2.6.1 To view the necessary arguments, run:
    ```sh
-   python save_model.py -h
+   python run_saved_model.py -h
 
 <br />
 <div align="center">
@@ -503,8 +503,13 @@ Open terminal and go to SISSSCO software directory. Example:
 </div>  
 
   * Arguments are: wavelet, multitaper and stockwell image datasets and number of qualified samples from 2.2.4
-  * Predictions will be saved as "test_prediction.csv" in the SISSSCO software directory. 
+  * Predictions will be saved as "prdiction_empirical_(vcf file name).csv" in the SISSSCO software directory. 
 
+* 2.4.3. Example run with sample image datasets:
+
+   ```sh
+   python run_saved_model.py X_CEU22_stockwell.npy X_CEU22_multitaper.npy X_CEU22_wavelet.npy 22942
+   ```
 
 <!-- LICENSE -->
 ## License

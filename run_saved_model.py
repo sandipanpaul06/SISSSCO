@@ -1,4 +1,5 @@
 import numpy as np
+import os
 
 
 
@@ -46,12 +47,12 @@ X_test_0 = np.load(path1 + '/TFA/' + s_ts)
 
 
 ####
-ts = np.zeros((2*ts_n, 65, 128, 1))
+ts = np.zeros((ts_n, 65, 128, 1))
 
 X_9_stockwell_test = []
 
 for s in range(9):
-    for i in range(2*ts_n):
+    for i in range(ts_n):
         for j in range(65):
             for k in range(128):
                 ts[i][j][k][0] = X_test_0[i][j][k][s]
@@ -72,11 +73,11 @@ from tensorflow.keras.optimizers import Adam
 
 X_test_1 = np.load(path1 + '/TFA/' + m_ts)
                 
-a = np.zeros((2*ts_n, 65, 128, 1))
+a = np.zeros((ts_n, 65, 128, 1))
 X_9_multitaper_test = []
 
 for s in range(9):
-    for i in range(2*ts_n):
+    for i in range(ts_n):
         for j in range(65):
             for k in range(128):
                 a[i][j][k][0] = X_test_1[i][j][k][s]
@@ -85,11 +86,11 @@ for s in range(9):
 ########
 
 X_test_2 = np.load(path1 + '/TFA/' + w_ts)
-a = np.zeros((2*ts_n, 65, 128, 1))
+a = np.zeros((ts_n, 65, 128, 1))
 X_9_wavelet_test = []
 
 for s in range(9):
-    for i in range(2*ts_n):
+    for i in range(ts_n):
         for j in range(65):
             for k in range(128):
                 a[i][j][k][0] = X_test_2[i][j][k][s]
@@ -101,7 +102,7 @@ finalModel = tf.keras.models.load_model(path1 + "/saved_model_SISSSCO")
 prediction = finalModel.predict([X_9_stockwell_test[0], X_9_stockwell_test[1], X_9_stockwell_test[2], X_9_stockwell_test[3], X_9_stockwell_test[4], X_9_stockwell_test[5], X_9_stockwell_test[6], X_9_stockwell_test[7], X_9_stockwell_test[8], X_9_multitaper_test[0], X_9_multitaper_test[1], X_9_multitaper_test[2], X_9_multitaper_test[3], X_9_multitaper_test[4], X_9_multitaper_test[5], X_9_multitaper_test[6], X_9_multitaper_test[7], X_9_multitaper_test[8], X_9_wavelet_test[0], X_9_wavelet_test[1], X_9_wavelet_test[2], X_9_wavelet_test[3], X_9_wavelet_test[4], X_9_wavelet_test[5], X_9_wavelet_test[6], X_9_wavelet_test[7], X_9_wavelet_test[8]])
 
 
-np.savetxt("prediction_empirical.csv", prediction, delimiter = ",")
+np.savetxt("prediction_empirical_" + s_ts[2:7] + ".csv", prediction, delimiter = ",")
 
 ####
 
