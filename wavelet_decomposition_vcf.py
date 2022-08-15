@@ -235,8 +235,8 @@ for s in range(9):
             train_mean[0][row][col][s] = np.mean(pixel_array)
             train_SD[0][row][col][s] = np.std(pixel_array)
 '''
-train_mean = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/train_mean_wavelet.npy")
-train_SD = np.load("/mnt/beegfs/home/sarnab2020/Datasets/Empirical/train_SD_wavelet.npy")
+train_mean = np.load(path1 + '/TFA/' + 'train_mean_wavelet.npy')
+train_SD = np.load(path1 + '/TFA/' + 'train_SD_wavelet.npy')
 '''
 scaled_spec_tensor_train = np.empty((2*tr_n, 65, 128, 9))
 
