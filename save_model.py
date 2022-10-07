@@ -88,12 +88,11 @@ tr = np.zeros((2*tr_n, 65, 128, 1))
 X_9_stockwell_train = []
 
 for s in range(9):
-    for i in range(2*tr_n):
-        for j in range(65):
-            for k in range(128):
-                tr[i][j][k][0] = X_train_0[i][j][k][s]
-                X_9_stockwell_train.append(tr)
-                
+	for i in range(2*tr_n):
+		for j in range(65):
+			for k in range(128):
+				tr[i][j][k][0] = X_train_0[i][j][k][s]
+	X_9_stockwell_train.append(tr)
 
 ts = np.zeros((2*ts_n, 65, 128, 1))
 
@@ -104,7 +103,7 @@ for s in range(9):
         for j in range(65):
             for k in range(128):
                 ts[i][j][k][0] = X_test_0[i][j][k][s]
-                X_9_stockwell_test.append(ts)
+    X_9_stockwell_test.append(ts)
                 
 
 vl = np.zeros((2*vl_n, 65, 128, 1))
@@ -116,7 +115,7 @@ for s in range(9):
         for j in range(65):
             for k in range(128):
                 vl[i][j][k][0] = X_val_0[i][j][k][s]
-                X_9_stockwell_val.append(vl)
+    X_9_stockwell_val.append(vl)
 
 ### free memory space
 X_train_0 = None
