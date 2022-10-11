@@ -49,9 +49,9 @@ s_ts = args.S_test
 m_ts = args.M_test
 w_ts = args.W_test
 
-s_vl = args.S_train
-m_vl = args.M_train
-w_vl = args.W_test
+s_vl = args.S_val
+m_vl = args.M_val
+w_vl = args.W_val
 
 
 tr_n = args.train
